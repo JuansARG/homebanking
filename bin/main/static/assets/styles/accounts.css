@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&family=Orbitron&family=Share+Tech+Mono&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    
+}
+
+body{
+    background-image: url(../img/pexels-misael-garcia-1707820.jpg);
+    font-family: 'Libre Baskerville', serif;
+}
+header{
+    height: 30vh;
+}
+
+main{
+    min-height: 80.8vh;
+}
+
+.titulos, footer, .nav-pills{
+    background-color: #FFC23C;
+    border: solid 2px #100720;
+}
+
+.btn{
+    color: #100720;
+    background-color: #FFC23C;
+}
+
+.btn:hover{
+    color: #FFC23C;
+    background-color: #100720!important;
+}
+
+#contenedorTarjetas{
+    font-family: 'Orbitron', sans-serif!important;
+}
+
+footer{
+    background-color: #FFC23C;
+}
+
+.card{
+    background: #614385;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #516395, #614385);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #516395, #614385); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-family: 'Orbitron', sans-serif!important;
+}
+
+@media (min-width: 631px){
+    #contenedorTarjetas{
+        flex-direction: row!important;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 375px){
+    main{
+        min-height: 82.9vh;
+    }
+}
+
+@media (min-width: 425px){
+    main{
+        min-height: 82.7vh;
+    }
+}
+
+@media (min-width: 768px){
+    main{
+        min-height: 86.3vh;
+    }
+    .nav-pills{
+        width: 50%;
+    }
+}
+
+@media (min-width: 1024px){
+    main{
+        min-height: 89.8vh;
+    }
+}
+
+@media (min-width: 1024px){
+    main{
+        min-height: 89.57vh;
+    }
+}

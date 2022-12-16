@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Libre Baskerville', serif;
+}
+
+body, .modal-body {
+    background-image: url(../img/pexels-misael-garcia-1707820.jpg);
+}
+
+header {
+    height: 30vh;
+}
+
+main {
+    min-height: 90.7vh;
+}
+
+pre {
+    background: #614385;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #516395, #614385);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #516395, #614385); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+footer, .subtitulos, .modal-header {
+    color: #100720;
+    background-color: #FFC23C;
+    border: solid 2px #100720;
+}
+
+.acciones:hover{
+    color: #FFC23C!important;
+}
+
+#botonAddClient:hover{
+    color: #FFC23C;
+    background-color: #100720!important;
+}
+
+
+
+@media (min-width: 992px) {
+    #main {
+        flex-direction: row !important;
+    }
+}
