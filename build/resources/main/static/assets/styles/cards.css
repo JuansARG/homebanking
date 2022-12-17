@@ -50,6 +50,10 @@ main{
     color: #FFC23C!important;
 }
 
+.tarjeta{
+    background-image: linear-gradient( 117deg,  rgba(123,216,96,1) 39.2%, rgba(255,255,255,1) 156.2% );
+}
+
 footer{
     background-color: #FFC23C;
     border: solid 2px #100720;

@@ -73,9 +73,9 @@ public class HomebankingApplication {
 			List<ClientLoan> clientLoanList = List.of(clientLoan1, clientLoan2, clientLoan3, clientLoan4);
 			clientLoanRepository.saveAll(clientLoanList);
 
-			Card card1 = new Card(client1, CardType.DEBIT, CardColor.GOLD, "3456-1234-8765-1239", 969);
-			Card card2 = new Card(client1, CardType.CREDIT, CardColor.TITANIUM, "4329-6542-2348-1236", 232);
-			Card card3 = new Card(client2, CardType.CREDIT, CardColor.SILVER, "8769-4329-9991-8728", 510);
+			Card card1 = new Card(client1, CardType.DEBIT, CardColor.GOLD, "3456123487651239", 969);
+			Card card2 = new Card(client1, CardType.CREDIT, CardColor.TITANIUM, "4329654223481236", 232);
+			Card card3 = new Card(client2, CardType.CREDIT, CardColor.SILVER, "8769432999918728", 510);
 
 			List<Card> cards = List.of(card1, card2, card3);
 			cardRepository.saveAll(cards);

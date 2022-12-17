@@ -20,7 +20,7 @@ createApp({
                     this.json = respuesta;
                     this.cliente = this.json.data;
                     this.tarjetas = this.cliente.cards;
-                    console.log(this.cliente);
+                    console.log(this.tarjetas);
                 })
                 .catch(e => console.log(e));
         }
