@@ -19,7 +19,7 @@ h1{
 }
 
 main{
-    min-height: 70vh;
+    min-height: 62vh;
 }
 
 .navbar{
@@ -48,6 +48,10 @@ main{
 .active{
     background-color: #100720;
     color: #FFC23C!important;
+}
+
+.tarjeta{
+    background-image: linear-gradient( 117deg,  rgba(123,216,96,1) 39.2%, rgba(255,255,255,1) 156.2% );
 }
 
 footer{

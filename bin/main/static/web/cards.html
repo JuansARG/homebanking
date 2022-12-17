@@ -76,9 +76,9 @@
                         <ul class="navbar-nav my-2 mb-lg-0 d-flex gap-2">
                             <li class="nav-item">
                                 <a 
+                                    href="http://localhost:8080/web/manager.html"    
                                     class="nav-link d-flex gap-1 align-items-center" 
                                     aria-current="page" 
-                                    href="http://localhost:8080/web/manager.html"
                                     style="padding: .5rem; font-size: .8rem;">
                                     Home
                                     <svg 
@@ -92,25 +92,26 @@
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a 
-                                    class="nav-link d-flex gap-1 align-items-center active text-nowrap"
+                                <a  
+                                    :href="'http://localhost:8080/web/accounts.html?id=' + cliente.id"
+                                    class="nav-link d-flex gap-1 align-items-center"
                                     style="padding: .5rem; font-size: .8rem;">
                                     Accounts
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a 
-                                    class="nav-link d-flex gap-1 align-items-center disabled"
-                                    style="padding: .5rem; font-size: .8rem;">
-                                    Transactions
                                     <svg 
                                         xmlns="http://www.w3.org/2000/svg" 
                                         width="22" height="22" 
                                         fill="currentColor" 
-                                        class="bi bi-lock text-dark" 
+                                        class="bi bi-unlock text-dark" 
                                         viewBox="0 0 16 16">
-                                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+                                        <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2zM3 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H3z"/>
                                     </svg>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a 
+                                    class="nav-link d-flex gap-1 align-items-center active"
+                                    style="padding: .5rem; font-size: .8rem;">
+                                    Cards
                                 </a>
                             </li>
                         </ul>
@@ -122,6 +123,81 @@
         </header>
 
         <main class="col-12 d-flex flex-column align-items-center gap-3 p-3">
+
+            <div class="col-12 col-xxl-10 animate__animated animate__fadeIn">
+                <h2 class="text-center p-2 px-3 rounded rounded-pill d-flex align-items-center justify-content-center gap-2" style="color: #FFC23C; background-color: #100720; border: 2px solid #FFC23C;">
+                    Welcome {{cliente.firstName + " " + cliente.lastName}}!
+                </h2>
+            </div>
+
+            <div 
+                class="mt-4 py-2 px-4 rounded rounded-pill animate__animated animate__headShake" 
+                style="background-color: #666; border: 2px solid #FFC23C;" 
+                v-if="tarjetas.lenght == 0">
+                <h2 
+                    class="text-center fw-bold m-0"
+                    style="color: #FFC23C;"
+                    >No cards yet...</h2>
+            </div>
+
+            <div class="container d-flex flex-column align-self-center gap-3 p-0 m-0 col-12 col-md-10 col-lg-8 col-xxl-6" id="contenedorTarjetas" v-else>
+
+                <template v-for="tarjeta in tarjetas">
+                    <div class="d-flex flex-column gap-2 col-12 col-sm-6 col-md-6 col-lg-6 col-xl-5 col-xxl-5 shadow-lg animate__animated animate__flipInY">
+                        <div class="card border-dark pb-2 tarjeta" style="height: 13rem;">
+                            <div class="d-flex gap-3 card-header text-dark">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                        width="40" height="40"
+                                        fill="currentColor"
+                                        class="bi bi-bank2" 
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M8.277.084a.5.5 0 0 0-.554 0l-7.5 5A.5.5 0 0 0 .5 6h1.875v7H1.5a.5.5 0 0 0 0 1h13a.5.5 0 1 0 0-1h-.875V6H15.5a.5.5 0 0 0 .277-.916l-7.5-5zM12.375 6v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zM8 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2zM.5 15a.5.5 0 0 0 0 1h15a.5.5 0 1 0 0-1H.5z" />
+                                    </svg>
+                                </span>
+                                <p class="m-0 text-end flex-grow-1 text-nowrap">Bank Mindhub Brother's</p>
+                            </div>
+                            <div class="card-body d-flex flex-column py-0 text-dark">
+                                <div class="d-flex justify-content-around my-auto">
+                                    <p class="card-title m-0 fs-5 mt-auto d-flex align-items-center gap-2">
+                                        {{tarjeta.number}}
+                                    </p>
+                                </div>
+                                <div class="d-flex mt-auto">
+                                    <div class="d-flex flex-column w-75">
+                                        <div class="d-flex align-items-center gap-1">
+                                            <p class="mb-0 ms-auto text-dark" style="font-size: .4rem;">CREATION DATE:</p>
+                                            <p class="card-text">{{tarjeta.thruDate.replaceAll("-", "/")}}</p>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-1">
+                                            <p class="mb-0 ms-auto text-dark" style="font-size: .4rem;">OWNER:</p>
+                                            <p class="card-text text-end">{{cliente.firstName + " " + cliente.lastName}}</p>
+                                        </div>
+                                    </div>
+                                    <span class="ms-auto">
+                                        <svg 
+                                            xmlns="http://www.w3.org/2000/svg" 
+                                            width="50" height="50" 
+                                            fill="currentColor" 
+                                            class="bi bi-cash-coin" 
+                                            viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
+                                            <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"/>
+                                            <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z"/>
+                                            <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z"/>
+                                          </svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </template>
+
+            </div>
+
+
 
         </main>
 
@@ -197,7 +273,8 @@
     </div>
 
     <!--bootstrapJS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    <script 
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" 
         crossorigin="anonymous">
     </script>

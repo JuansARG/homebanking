@@ -3,7 +3,10 @@ const { createApp} = Vue;
 createApp({
     data(){
         return {
-            json: "",
+            id: "",
+            json: {},
+            cliente: {},
+            tarjetas: [],
         }
     },
     created(){
@@ -11,10 +14,13 @@ createApp({
     },
     methods: {
         cargarDatos(){
-            axios.get("http://localhost:8080/api/clients/1")
+            this.id = new URLSearchParams(document.location.search).get("id");
+            axios.get("http://localhost:8080/api/clients/" + this.id)
                 .then(respuesta => {
                     this.json = respuesta;
-                    console.log(this.json);
+                    this.cliente = this.json.data;
+                    this.tarjetas = this.cliente.cards;
+                    console.log(this.tarjetas);
                 })
                 .catch(e => console.log(e));
         }

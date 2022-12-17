@@ -8,7 +8,6 @@ import java.time.LocalDate;
 @Entity
 public class Card {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
