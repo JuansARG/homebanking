@@ -76,7 +76,7 @@
                         <ul class="navbar-nav my-2 mb-lg-0 d-flex gap-2">
                             <li class="nav-item">
                                 <a 
-                                    href="http://localhost:8080/web/manager.html"    
+                                    href="./home.html"    
                                     class="nav-link d-flex gap-1 align-items-center" 
                                     aria-current="page" 
                                     style="padding: .5rem; font-size: .8rem;">
@@ -125,15 +125,23 @@
         <main class="col-12 d-flex flex-column align-items-center gap-3 p-3">
 
             <div class="col-12 col-xxl-10 animate__animated animate__fadeIn">
-                <h2 class="text-center p-2 px-3 rounded rounded-pill d-flex align-items-center justify-content-center gap-2" style="color: #FFC23C; background-color: #100720; border: 2px solid #FFC23C;">
+                <h2 
+                    class="text-center p-2 px-3 rounded rounded-pill d-flex align-items-center justify-content-center gap-2" 
+                    style="color: #FFC23C; background-color: #100720; border: 2px solid #FFC23C;">
                     Welcome {{cliente.firstName + " " + cliente.lastName}}!
                 </h2>
             </div>
 
+            <h2 
+                class="m-0 p-2 rounded-pill align-self-center text-center fw-bold col-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4 animate__animated animate__pulse"
+                style="color: #100720; background-color: #FFC23C; border: 2px solid #100720;">
+                Your cards
+            </h2>
+
             <div 
                 class="mt-4 py-2 px-4 rounded rounded-pill animate__animated animate__headShake" 
                 style="background-color: #666; border: 2px solid #FFC23C;" 
-                v-if="tarjetas.lenght == 0">
+                v-if="tarjetas.length == 0">
                 <h2 
                     class="text-center fw-bold m-0"
                     style="color: #FFC23C;"
@@ -144,7 +152,13 @@
 
                 <template v-for="tarjeta in tarjetas">
                     <div class="d-flex flex-column gap-2 col-12 col-sm-6 col-md-6 col-lg-6 col-xl-5 col-xxl-5 shadow-lg animate__animated animate__flipInY">
-                        <div class="card border-dark pb-2 tarjeta" style="height: 13rem;">
+                        <div
+                            style="height: 13rem;"
+                            :class="[
+                                tarjeta.color.includes('TITANIUM') ? 'titanium card border-dark pb-2' : '',
+                                tarjeta.color.includes('GOLD') ? 'gold card border-dark pb-2' : '',
+                                tarjeta.color.includes('SILVER') ? 'silver card border-dark pb-2' : ''
+                            ]">
                             <div class="d-flex gap-3 card-header text-dark">
                                 <img src="/assets/img/lechuza.png" alt="logo" style="width: 40px; height: 40px;">
                                 <p class="m-0 text-end flex-grow-1 text-nowrap">Old Owl Bank's</p>
@@ -153,36 +167,51 @@
                                 <div class="d-flex flex-column justify-content-around my-auto">
                                     <span class="d-flex align-items-center gap-2">
                                         <img src="../assets/img/chip.png" alt="" style="width: 40px; height: 40px;">
-                                        <p class="m-0 fw-bold">{{tarjeta.type}}</p>
+                                        <p class="m-0 fw-bold" style="font-size: .9rem;">{{tarjeta.color}}</p>
                                     </span>
-                                    <p class="card-title m-0 fs-5 mt-auto d-flex align-items-center gap-2">
-                                        
-                                        {{tarjeta.number}}
-                                    </p>
+                                    <span class="d-flex justify-content-evenly" style="font-size: 1.2rem;">
+                                        <p class="m-0 fw-semibold">{{tarjeta.number.substring(0,4)}}</p>
+                                        <p class="m-0 fw-semibold">{{tarjeta.number.substring(4,8)}}</p>
+                                        <p class="m-0 fw-semibold">{{tarjeta.number.substring(8,12)}}</p>
+                                        <p class="m-0 fw-semibold">{{tarjeta.number.substring(12,16)}}</p>
+                                    </span>
                                 </div>
                                 <div class="d-flex mt-auto">
-                                    <div class="d-flex flex-column w-75">
-                                        <div class="d-flex align-items-center gap-1">
-                                            <p class="mb-0 ms-auto text-dark" style="font-size: .4rem;">CREATION DATE:</p>
-                                            <p class="card-text">{{tarjeta.thruDate.replaceAll("-", "/")}}</p>
+                                    <div class="d-flex flex-column w-75 gap-3 mt-auto">
+                                        <div class="d-flex justify-content-around">
+                                            <span class="d-flex align-items-center gap-1">
+                                                <span class="d-flex flex-column align-items-center">
+                                                    <p class="m-0 text-dark" style="font-size: .4rem;">VALID</p>
+                                                    <p class="m-0 text-dark" style="font-size: .4rem;">FROM</p>
+                                                </span>
+                                                <p class="m-0" style="font-size: .8rem;">{{tarjeta.thruDate.substring(2, 7).replaceAll("-", "/")}}</p>
+                                            </span>
+                                            <span class="d-flex align-items-center gap-1">
+                                                <span class="d-flex flex-column">
+                                                    <p class="mb-0 text-dark" style="font-size: .4rem;">GOOD</p>
+                                                    <p class="mb-0 text-dark" style="font-size: .4rem;">THRU</p>
+                                                </span>
+                                                <p class="m-0" style="font-size: .8rem;">{{tarjeta.fromDate.substring(2, 7).replaceAll("-", "/")}}</p>
+                                            </span>
                                         </div>
-                                        <div class="d-flex align-items-center gap-1">
-                                            <p class="mb-0 ms-auto text-dark" style="font-size: .4rem;">OWNER:</p>
-                                            <p class="card-text text-end">{{cliente.firstName + " " + cliente.lastName}}</p>
+                                        <div class="d-flex justify-content-center">
+                                            <span class="d-flex align-items-center gap-1">
+                                                <p class="m-0 text-dark" style="font-size: .4rem;">OWNER:</p>
+                                                <p class="card-text text-end">{{cliente.firstName + " " + cliente.lastName}}</p>
+                                            </span>
                                         </div>
                                     </div>
-                                    <span class="ms-auto">
+                                    <span class="ms-auto d-flex flex-column">
                                         <svg 
                                             xmlns="http://www.w3.org/2000/svg" 
-                                            width="50" height="50" 
+                                            width="50" height="45" 
                                             fill="currentColor" 
-                                            class="bi bi-cash-coin" 
+                                            class="bi bi-credit-card" 
                                             viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
-                                            <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"/>
-                                            <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z"/>
-                                            <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z"/>
+                                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+                                            <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
                                           </svg>
+                                          <p class="m-0 fw-bold text-center" style="font-size: .8rem;">{{tarjeta.type}}</p>
                                     </span>
                                 </div>
                             </div>

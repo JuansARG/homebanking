@@ -73,7 +73,7 @@
                                 <a 
                                     class="nav-link d-flex gap-2 align-items-center" 
                                     aria-current="page" 
-                                    href="http://localhost:8080/web/manager.html"
+                                    href="http://localhost:8080/web/home.html"
                                     style="padding: .5rem; font-size: .8rem;">
                                     Home
                                     <svg 
@@ -87,17 +87,18 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a 
-                                    class="nav-link d-flex gap-1 align-items-center disabled text-nowrap"
+                                <a  
+                                    :href="linkAccounts"
+                                    class="nav-link d-flex gap-1 align-items-center"
                                     style="padding: .5rem; font-size: .8rem;">
-                                    Accounts & Loans
-                                    <svg 
+                                    Accounts
+                                    <svg
                                         xmlns="http://www.w3.org/2000/svg" 
                                         width="22" height="22" 
                                         fill="currentColor" 
-                                        class="bi bi-lock text-dark" 
+                                        class="bi bi-unlock text-dark" 
                                         viewBox="0 0 16 16">
-                                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+                                        <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2zM3 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H3z"/>
                                     </svg>
                                 </a>
                             </li>
@@ -139,13 +140,13 @@
                     </h2>
 
                     <div 
-                        class="mt-4 mx-auto py-2 px-4 w-50 rounded rounded-pill animate__animated animate__headShake" 
+                        class="mt-4 mx-auto py-2 px-4 rounded rounded-pill animate__animated animate__headShake" 
                         style="background-color: #666; border: 2px solid #FFC23C;" 
                         v-if="transacciones.length == 0">
                         <h2 
-                            class=" fw-bold m-0"
+                            class=" fw-bold m-0 text-nowrap"
                             style="color: #FFC23C;"
-                            >No accounts yet...
+                            >No transactions yet...
                         </h2>
                     </div>
 
