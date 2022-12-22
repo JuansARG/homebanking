@@ -3,7 +3,7 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-            id: "",
+            email: "",
             cliente: {},
             cuentas: {},
             prestamos: {},
@@ -13,13 +13,22 @@ createApp({
         this.cargarDatos();
     },
     methods: {
-        cargarDatos() {
-            this.id = new URLSearchParams(document.location.search).get("id");
-            axios.get("http://localhost:8080/api/clients/" + this.id)
+        cargarDatos() {;
+            axios.get("http://localhost:8080/api/clients/current")
                 .then(respuesta => {
                     this.cliente = respuesta.data;
                     this.cuentas = this.cliente.account;
                     this.prestamos = this.cliente.loans.sort((a, b) => a.id - b.id);
+                    console.log(this.cuentas)
+                })
+                .catch(e => console.log(e));
+        },
+
+        logout(){
+            axios.post("http://localhost:8080/api/logout")
+                .then(r => {
+                    alert("redirect to login");
+                    location.href = "http://localhost:8080/web/login.html"
                 })
                 .catch(e => console.log(e));
         }
