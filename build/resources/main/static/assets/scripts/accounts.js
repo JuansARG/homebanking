@@ -19,6 +19,7 @@ createApp({
                     this.cliente = respuesta.data;
                     this.cuentas = this.cliente.account;
                     this.prestamos = this.cliente.loans.sort((a, b) => a.id - b.id);
+                    console.log(this.cuentas)
                 })
                 .catch(e => console.log(e));
         },

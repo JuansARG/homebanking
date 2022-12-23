@@ -51,7 +51,9 @@ main{
 }
 
 .titanium{
-    background-color: #FFC23C;
+    color: #FFC23C!important;
+    background-color: #100720;
+    border: 2px solid #FFC23C;
 }
 
 .gold{
