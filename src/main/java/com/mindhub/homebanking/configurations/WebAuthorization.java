@@ -1,11 +1,13 @@
 package com.mindhub.homebanking.configurations;
 
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
@@ -15,19 +17,18 @@ import javax.servlet.http.HttpSession;
 
 @Configuration
 @EnableWebSecurity
-public class WebAuthorization extends WebSecurityConfigurerAdapter {
+public class WebAuthorization {
 
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
                 .antMatchers("/rest/**").denyAll()
                 .antMatchers("/web/index.html", "/web/login.html", "/assets/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
-                .antMatchers("/manager.html", "/h2-console", "/web/**").hasAuthority("ADMIN")
-                .antMatchers("/web/**", "/api/clients/current").hasAuthority("CLIENT");
-
+                .antMatchers("/manager.html", "/h2-console" ).hasAuthority("ADMIN")
+                .antMatchers("/web/**", "/api/clients/current").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/current/clients/cards").hasAuthority("CLIENT");
 
         // turn off checking for CSRF tokens
         http.csrf().disable();
@@ -41,6 +42,7 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
         // if login is successful, just clear the flags asking for authentication
         http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
 
+
         // if login fails, just send an authentication failure response
         http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
 
@@ -53,7 +55,9 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
                 .loginPage("/api/login");
 
         http.logout()
-                .logoutUrl("/api/logout");
+                .logoutUrl("/api/logout").deleteCookies("JSESSIONID");
+
+        return http.build();
     }
 
     private void clearAuthenticationAttributes(HttpServletRequest request) {
@@ -62,6 +66,5 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
             session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
         }
     }
-
 
 }

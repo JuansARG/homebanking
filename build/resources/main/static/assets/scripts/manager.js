@@ -74,11 +74,9 @@ createApp({
                                 icon: "success",
                                 text: "Deleted customer",
                             });
-                        })
-                        .catch(e => console.log(e));                    
+                        }).catch(e => console.log(e));                    
                 }
-            })
-                .catch(e => console.log(e));
+            }).catch(e => console.log(e));
         },
 
         modificarCliente(cliente) {

@@ -5,7 +5,7 @@ createApp({
         return {
             json: {},
             cliente: {},
-            tarjetas: [],
+            tarjetas: []
         }
     },
     created(){
@@ -29,6 +29,16 @@ createApp({
                     location.href = "http://localhost:8080/web/login.html"
                 })
                 .catch(e => console.log(e));
+        },
+        /*
+        crearTarjeta(){
+            axios.post('http://localhost:8080/api/clients/current/card', "type=" + this.tipoTarjeta +
+                                                                        "&color=" + this.colorTarjeta)
+            .then(r => {
+                location.reload();
+            })
+            .catch(e => console.log(e));
         }
+        */
     }
 }).mount("#app");

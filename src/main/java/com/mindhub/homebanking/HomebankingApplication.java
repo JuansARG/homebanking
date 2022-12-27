@@ -2,6 +2,7 @@ package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.*;
+import com.mindhub.homebanking.utils.RandomNum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -47,10 +48,10 @@ public class HomebankingApplication {
 			List<Client> clients = List.of(client1, client2, client3, client4, admin);
 			clientRepository.saveAll(clients);
 
-			Account account1 = new Account("VIN001", LocalDateTime.now(), 5000, client1);
-			Account account2 = new Account("VIN002", LocalDateTime.now().plusDays(1), 7500, client1);
-			Account account3 = new Account("VIN007", LocalDateTime.now(), 5000, client2);
-			Account account4 = new Account("VIN007", LocalDateTime.now().plusDays(1), 7500, client2);
+			Account account1 = new Account("VIN001", 5000, client1);
+			Account account2 = new Account("VIN002", 7500, client1);
+			Account account3 = new Account("VIN007", 5000, client2);
+			Account account4 = new Account("VIN007", 7500, client2);
 
 			List<Account> accounts = List.of(account1, account2, account3, account4);
 			accountRepository.saveAll(accounts);
@@ -85,9 +86,9 @@ public class HomebankingApplication {
 			List<ClientLoan> clientLoanList = List.of(clientLoan1, clientLoan2, clientLoan3, clientLoan4);
 			clientLoanRepository.saveAll(clientLoanList);
 
-			Card card1 = new Card(client1, CardType.DEBIT, CardColor.GOLD, "3456123487651239", 969);
-			Card card2 = new Card(client1, CardType.CREDIT, CardColor.TITANIUM, "4329654223481236", 232);
-			Card card3 = new Card(client2, CardType.CREDIT, CardColor.SILVER, "8769432999918728", 510);
+			Card card1 = new Card(client1, CardType.DEBIT, CardColor.GOLD, RandomNum.getRandonNumber4CardNum(), RandomNum.getRandomNum4CVV());
+			Card card2 = new Card(client1, CardType.CREDIT, CardColor.TITANIUM, RandomNum.getRandonNumber4CardNum(), RandomNum.getRandomNum4CVV());
+			Card card3 = new Card(client2, CardType.CREDIT, CardColor.SILVER, RandomNum.getRandonNumber4CardNum(), RandomNum.getRandomNum4CVV());
 
 			List<Card> cards = List.of(card1, card2, card3);
 			cardRepository.saveAll(cards);

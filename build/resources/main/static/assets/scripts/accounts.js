@@ -6,6 +6,7 @@ createApp({
             email: "",
             cliente: {},
             cuentas: {},
+            idCuenta : undefined,
             prestamos: {},
         }
     },
@@ -19,7 +20,6 @@ createApp({
                     this.cliente = respuesta.data;
                     this.cuentas = this.cliente.account;
                     this.prestamos = this.cliente.loans.sort((a, b) => a.id - b.id);
-                    console.log(this.cuentas)
                 })
                 .catch(e => console.log(e));
         },
@@ -31,6 +31,32 @@ createApp({
                     location.href = "http://localhost:8080/web/login.html"
                 })
                 .catch(e => console.log(e));
+        },
+
+        crearCuenta(){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes!'
+            }).then(r => {
+                if(r.isConfirmed){
+                    Swal.fire({
+                        icon: "success",
+                        text: "Your account has been created.",
+                    }).then(r => {
+    
+                        axios.post("http://localhost:8080/api/clients/current/accounts")
+                        .then(r => {
+                            location.reload();
+                        })
+                        .catch(e => console.log(e));
+                    })
+                } 
+            }).catch(e => {
+
+            });
         }
-    }
+    },
 }).mount("#app");

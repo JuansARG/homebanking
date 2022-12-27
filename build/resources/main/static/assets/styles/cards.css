@@ -73,6 +73,7 @@ footer{
     #contenedorTarjetas{
         flex-direction: row!important;
         justify-content: space-between;
+        flex-wrap: wrap!important;
     }
 }
 
@@ -86,5 +87,11 @@ footer{
     #divHeader{
         flex-direction: row!important;
         justify-content: space-around;
+    }
+}
+
+@media (min-width: 1023px){
+    #contenedorTarjetas{
+        
     }
 }
