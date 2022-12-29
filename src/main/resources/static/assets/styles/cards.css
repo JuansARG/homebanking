@@ -19,7 +19,7 @@ h1{
 }
 
 main{
-    min-height: 62vh;
+    min-height: 66vh;
 }
 
 .navbar{
@@ -45,9 +45,21 @@ main{
     font-weight: bold;
 }
 
+.nav-link:hover{
+    background-color: #777;
+    border-color: #100720;
+    color: #FFC23C;
+}
+
 .active{
     background-color: #100720;
     color: #FFC23C!important;
+}
+
+.container{
+    background-color: rgba(255, 255, 255, 0.30);
+    backdrop-filter: blur( 4px);
+    border: 1px solid  rgba(255, 255, 255, 0.18);
 }
 
 .titanium{
@@ -58,10 +70,12 @@ main{
 
 .gold{
     background-color: gold;
+    border: 2px solid #100720;
 }
 
 .silver{
     background-color: silver;
+    border: 2px solid #100720;
 }
 
 .swal2-cancel {
@@ -90,8 +104,10 @@ footer{
 @media (min-width: 631px){
     #contenedorTarjetas{
         flex-direction: row!important;
-        justify-content: space-between;
-        flex-wrap: wrap!important;
+    }
+
+    #contenedorTarjetasCredito, #contenedorTarjetasDebito{
+        width: 50%;
     }
 }
 
@@ -110,6 +126,6 @@ footer{
 
 @media (min-width: 1023px){
     #contenedorTarjetas{
-        
+        flex-direction: row!important;
     }
 }

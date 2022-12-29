@@ -5,7 +5,9 @@ createApp({
         return {
             json: {},
             cliente: {},
-            tarjetas: []
+            tarjetas: [],
+            tarjetasCredito: [],
+            tarjetasDebito: [],
         }
     },
     created(){
@@ -18,12 +20,16 @@ createApp({
                     this.json = respuesta;
                     this.cliente = this.json.data;
                     this.tarjetas = this.cliente.cards;
+                    this.tarjetasCredito = this.tarjetas.filter(tarjeta => tarjeta.type == "CREDIT");
+                    this.tarjetasDebito = this.tarjetas.filter(tarjeta => tarjeta.type == "DEBIT")
+                    console.log(this.tarjetas)
+                    console.log(this.tarjetasCredito)
+                    console.log(this.tarjetasDebito)                    
                 })
                 .catch(e => console.log(e));
         },
 
         logout(){
-                
             Swal.fire({
                 title: 'Are you sure?',
                 text: "",
@@ -45,16 +51,6 @@ createApp({
                 }
             }).catch(e => console.log(e));
 
-        },
-        /*
-        crearTarjeta(){
-            axios.post('http://localhost:8080/api/clients/current/card', "type=" + this.tipoTarjeta +
-                                                                        "&color=" + this.colorTarjeta)
-            .then(r => {
-                location.reload();
-            })
-            .catch(e => console.log(e));
         }
-        */
     }
 }).mount("#app");

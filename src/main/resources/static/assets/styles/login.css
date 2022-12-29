@@ -42,13 +42,19 @@ h1 {
     font-weight: bold;
 }
 
+.nav-link:hover{
+    background-color: #777;
+    border-color: #100720;
+    color: #FFC23C;
+}
+
 .active {
     background-color: #100720;
     color: #FFC23C !important;
 }
 
 main {
-    min-height: 70vh;
+    min-height: 65vh;
 }
 
 .container{

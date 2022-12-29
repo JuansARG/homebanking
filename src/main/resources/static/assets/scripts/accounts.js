@@ -25,7 +25,6 @@ createApp({
         },
 
         logout(){
-                
             Swal.fire({
                 title: 'Are you sure?',
                 text: "",
@@ -46,7 +45,6 @@ createApp({
                     })
                 }
             }).catch(e => console.log(e));
-
         },
 
         crearCuenta(){

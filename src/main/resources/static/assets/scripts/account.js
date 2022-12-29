@@ -10,6 +10,7 @@ createApp({
             transacciones: [],
             fechaDeCreacion: "",
             balance: "",
+            cliente: {},
         }
     },
     created() {
@@ -21,11 +22,12 @@ createApp({
             axios.get("http://localhost:8080/api/clients/current")
                 .then((respuesta) => {
                     this.json = respuesta;
-                    this.cuenta = respuesta.data.account.find(cuenta => cuenta.id = this.id);
+                    this.cliente = this.json.data;
+                    this.cuenta = respuesta.data.account.find(cuenta => cuenta.id == this.id);
                     this.numeroDeCuenta = this.cuenta.number;
-                    this.transacciones = this.cuenta.transactions.sort((a, b) => a.id - b.id);
-                    this.fechaDeCreacion = this.cuenta.creationDate.substring(0,10).replaceAll("-", "/");
                     this.balance = this.cuenta.balance;
+                    this.fechaDeCreacion = this.cuenta.creationDate.substring(0,10).replaceAll("-", "/");
+                    this.transacciones = this.cuenta.transactions.sort((a, b) => a.id - b.id);
                 })
                 .catch(e => console.log(e));
         },

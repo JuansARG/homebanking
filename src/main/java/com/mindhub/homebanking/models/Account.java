@@ -26,7 +26,7 @@ public class Account {
     public Account() {
     }
     public Account(String number, double balance, Client owner) {
-        this.number = number;
+        this.number = "VIN-" + number;
         this.creationDate = LocalDate.now();
         this.balance = balance;
         this.client = owner;

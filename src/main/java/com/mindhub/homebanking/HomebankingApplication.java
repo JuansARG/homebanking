@@ -48,10 +48,10 @@ public class HomebankingApplication {
 			List<Client> clients = List.of(client1, client2, client3, client4, admin);
 			clientRepository.saveAll(clients);
 
-			Account account1 = new Account("VIN001", 5000, client1);
-			Account account2 = new Account("VIN002", 7500, client1);
-			Account account3 = new Account("VIN007", 5000, client2);
-			Account account4 = new Account("VIN007", 7500, client2);
+			Account account1 = new Account(RandomNum.getRandomNumber4Vin(), 5000, client1);
+			Account account2 = new Account(RandomNum.getRandomNumber4Vin(), 7500, client1);
+			Account account3 = new Account(RandomNum.getRandomNumber4Vin(), 5000, client2);
+			Account account4 = new Account(RandomNum.getRandomNumber4Vin(), 7500, client2);
 
 			List<Account> accounts = List.of(account1, account2, account3, account4);
 			accountRepository.saveAll(accounts);
