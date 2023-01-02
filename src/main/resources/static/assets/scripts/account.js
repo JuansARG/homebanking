@@ -25,7 +25,7 @@ createApp({
                     this.cliente = this.json.data;
                     this.cuenta = respuesta.data.account.find(cuenta => cuenta.id == this.id);
                     this.numeroDeCuenta = this.cuenta.number;
-                    this.balance = this.cuenta.balance;
+                    this.balance = this.cuenta.balance.toFixed(2);
                     this.fechaDeCreacion = this.cuenta.creationDate.substring(0,10).replaceAll("-", "/");
                     this.transacciones = this.cuenta.transactions.sort((a, b) => a.id - b.id);
                 })

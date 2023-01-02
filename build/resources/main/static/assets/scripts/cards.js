@@ -21,10 +21,7 @@ createApp({
                     this.cliente = this.json.data;
                     this.tarjetas = this.cliente.cards;
                     this.tarjetasCredito = this.tarjetas.filter(tarjeta => tarjeta.type == "CREDIT");
-                    this.tarjetasDebito = this.tarjetas.filter(tarjeta => tarjeta.type == "DEBIT")
-                    console.log(this.tarjetas)
-                    console.log(this.tarjetasCredito)
-                    console.log(this.tarjetasDebito)                    
+                    this.tarjetasDebito = this.tarjetas.filter(tarjeta => tarjeta.type == "DEBIT")                 
                 })
                 .catch(e => console.log(e));
         },

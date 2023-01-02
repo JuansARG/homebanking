@@ -56,13 +56,13 @@ public class HomebankingApplication {
 			List<Account> accounts = List.of(account1, account2, account3, account4);
 			accountRepository.saveAll(accounts);
 
-			Transaction transaction1 = new Transaction(TransactionType.DEBIT, -1000, "Corte de Pelo", LocalDateTime.now(), account1);
-			Transaction transaction2 = new Transaction(TransactionType.CREDIT, 6000, "Lentes", LocalDateTime.now(), account1);
-			Transaction transaction3 = new Transaction(TransactionType.DEBIT, -2000, "Picada", LocalDateTime.now(), account1);
-			Transaction transaction4 = new Transaction(TransactionType.DEBIT, -3000, "Mouse", LocalDateTime.now(), account1);
-			Transaction transaction5 = new Transaction(TransactionType.CREDIT, 6000, "Teclado", LocalDateTime.now(), account1);
-			Transaction transaction6 = new Transaction(TransactionType.DEBIT, -2000, "Cervezas", LocalDateTime.now(), account1);
-			Transaction transaction7 = new Transaction(TransactionType.CREDIT, 600, "Youtube Premium", LocalDateTime.now(), account3);
+			Transaction transaction1 = new Transaction(TransactionType.DEBIT, 1000, "Corte de Pelo", account1);
+			Transaction transaction2 = new Transaction(TransactionType.CREDIT, 6000, "Lentes", account1);
+			Transaction transaction3 = new Transaction(TransactionType.DEBIT, 2000, "Picada", account1);
+			Transaction transaction4 = new Transaction(TransactionType.DEBIT, 3000, "Mouse", account1);
+			Transaction transaction5 = new Transaction(TransactionType.CREDIT, 6000, "Teclado", account1);
+			Transaction transaction6 = new Transaction(TransactionType.DEBIT, 2000, "Cervezas", account1);
+			Transaction transaction7 = new Transaction(TransactionType.CREDIT, 600, "Youtube Premium", account3);
 
 			List<Transaction> transactions = List.of(transaction1, transaction2, transaction3, transaction4, transaction5, transaction6, transaction7);
 			transactionRepository.saveAll(transactions);

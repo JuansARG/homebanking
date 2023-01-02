@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,22 +8,25 @@
     <link rel="shortcut icon" href="/assets/img/favi-bank3.png" type="image/x-icon">
 
     <!--bootstrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" 
+        rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" 
+        crossorigin="anonymous">
 
     <!--animacionesTitulos-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <!--css-->
-    <link rel="stylesheet" href="/assets/styles/account.css">
+    <link rel="stylesheet" href="/assets/styles/transfers.css">
 
-    <title>Account</title>
+    <title>Transfers</title>
 </head>
+
 <body>
 
     <div id="app">
 
-        <header class="d-flex flex-column gap-3 justify-content-center align-items-center animate__animated animate__fadeInUp">
+        <header class="d-flex flex-column justify-content-center align-items-center animate__animated animate__fadeInUp">
             <div class="w-100 d-flex flex-column align-items-center gap-3 py-4 px-2" id="divHeader">
                 <img src="/assets/img/lechuza.png" alt="logo" style="width: 170px; height: 150px;">
                 <h1 class="text-center text-light p-0 m-0 fw-bold" 
@@ -31,6 +35,7 @@
                     Old owl Bank's
                 </h1>
             </div>
+            
 
             <nav class="navbar navbar-expand-lg w-100 p-0">
                 <div class="container-fluid d-flex align-items-center p-3">
@@ -67,14 +72,14 @@
                         <ul class="navbar-nav my-2 mb-lg-0 d-flex gap-2">
                             <li class="nav-item">
                                 <a 
-                                    class="nav-link d-flex gap-2 align-items-center" 
+                                    href="./home.html"    
+                                    class="nav-link d-flex gap-1 align-items-center" 
                                     aria-current="page" 
-                                    href="http://localhost:8080/web/home.html"
                                     style="padding: .5rem; font-size: .8rem;">
                                     Home
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item ">
                                 <a  
                                     href="http://localhost:8080/web/accounts.html"
                                     class="nav-link d-flex gap-1 align-items-center"
@@ -83,18 +88,19 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a 
-                                    class="nav-link d-flex gap-1 align-items-center active"
+                                <a  
+                                href="http://localhost:8080/web/cards.html"
+                                    class="nav-link d-flex gap-1 align-items-center"
                                     style="padding: .5rem; font-size: .8rem;">
-                                    Transactions
+                                    Cards
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a 
-                                    href="http://localhost:8080/web/cards.html"
-                                    class="nav-link d-flex gap-1 align-items-center"
+                                    href="#"
+                                    class="nav-link d-flex gap-1 align-items-center active"
                                     style="padding: .5rem; font-size: .8rem;">
-                                    Cards
+                                    Transfers
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -110,179 +116,81 @@
                     
                 </div>
             </nav>
-        
+
         </header>
 
-        <main class="col-12 d-flex flex-column gap-3 p-3" id="main">
+        <main class="col-12 d-flex flex-column align-items-center gap-3 p-3">
+
+            <div class="col-12 col-xxl-10 animate__animated animate__fadeIn">
+                <h2 class="text-center m-0 p-2 px-3 rounded rounded-pill d-flex align-items-center justify-content-center gap-2" style="color: #FFC23C; background-color: #100720; border: 2px solid #FFC23C;">
+                    Welcome to your homebanking app!
+                </h2>
+            </div>
 
             <div class="container p-2 rounded">
 
-                <h2 class="text-center py-1 m-0 my-2 fw-bold border border-warning">This account:</h2>
+                <h2 class="text-center py-1 m-0 my-2 fw-bold border border-warning">Transfers</h2>
 
+                <form class="d-flex flex-column gap-4 my-2 animate__animated animate__fadeIn">
+                    <div class="d-flex flex-column gap-3">
+                        <p class="m-0">Step 1: Select type of transfer.</p>
+                        <select class="form-select" v-model="tipoTransferencia">
+                            <option value="" disabled >Select</option>
+                            <option value="propia">Own</option>
+                            <option value="tercero">Other</option>
+                        </select>
 
-                <div class="d-flex flex-column align-items-center">
-                    
-                    <div class="d-flex flex-column gap-2 col-12 col-sm-7 col-md-6 col-lg-4 col-xl-4 col-xxl-3 shadow-lg animate__animated animate__flipInY">
-                        <div class="card border-dark pb-2" style="height: 13rem;" id="cuentas">
-                            <div class="d-flex gap-3 card-header text-light">
-                                <img src="/assets/img/lechuza.png" alt="logo" style="width: 40px; height: 40px;">
-                                <p class="m-0 text-end flex-grow-1 text-nowrap">Old Owl Bank's</p>
-                            </div>
-                            <div class="card-body d-flex flex-column py-0 text-light">
-                                <div class="d-flex justify-content-around my-auto">
-                                    <p class="card-title m-0 fs-5 mt-auto d-flex align-items-center gap-2">
-                                        Account : {{numeroDeCuenta}}
-                                    </p>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <span class="d-flex gap-1 align-items-center">
-                                        <p class="card-text m-0">ARGS</p>
-                                        <svg class="text-light fw-bold" 
-                                            xmlns="http://www.w3.org/2000/svg" 
-                                            width="22" height="22"
-                                            fill="currentColor" 
-                                            class="bi bi-currency-dollar" 
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z" />
-                                        </svg>
-                                    </span>
-                                    <p class="m-0 fw-bold fs-2 ms-auto">{{balance.toFixed(2)}}</p>
-                                </div>
-                                <div class="d-flex mt-auto">
-                                    <div class="d-flex flex-column w-75">
-                                        <div class="d-flex align-items-center gap-1">
-                                            <p class="mb-0 ms-auto text-light" style="font-size: .4rem;">CREATION DATE:</p>
-                                            <p class="card-text">{{fechaDeCreacion}}</p>
-                                        </div>
-                                        <div class="d-flex align-items-center gap-1">
-                                            <p class="mb-0 ms-auto text-light" style="font-size: .4rem;">OWNER:</p>
-                                            <p class="card-text text-end">{{cliente.firstName + " " + cliente.lastName}}</p>
-                                        </div>
-                                    </div>
-                                    <span class="ms-auto">
-                                        <svg 
-                                            xmlns="http://www.w3.org/2000/svg" 
-                                            width="50" height="50" 
-                                            fill="currentColor" 
-                                            class="bi bi-cash-coin" 
-                                            viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
-                                            <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"/>
-                                            <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z"/>
-                                            <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z"/>
-                                          </svg>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
+                        
+                        <template v-if="tipoTransferencia == `propia`">
 
-                <h2 class="text-center py-1 m-0 my-2 fw-bold border border-warning">Transaction list:</h2>
-                <div v-if="transacciones.length == 0">
-                    <h3 class="m-0 mt-1">No transactions yet...</h3>
-                </div>
-
-                <div class="table-responsive rounded animate__animated animate__fadeIn" v-else>
-                    <table class="table table-light table-striped table-hover mb-0">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Hour</th>
-                            </tr>
-                        </thead>
-                        <tbody v-for="transaccion in transacciones">
-                            <tr>
-                                <td>{{transaccion.id}}</td>
-                                <td
-                                :class="[transaccion.type.includes('CREDIT') ? 'text-success' : 'text-danger']">
-                                {{transaccion.type}}</td>
-                                <td
-                                :class="[transaccion.type.includes('CREDIT') ? 'text-success' : 'text-danger']">
-                                {{transaccion.amount}}</td>
-                                <td>{{transaccion.description}}</td>
-                                <td class="text-nowrap">{{transaccion.date.substring(0,10).replaceAll("-", "/")}}</td>
-                                <td>{{transaccion.date.substring(11,16) + "hs."}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-            </div>
-            
-            <!--
-            <div class="col-12 col-lg-6 col-xxl-5 mb-3">
-                <div class="d-flex flex-column gap-2 mb-3">
-                    
-                    <h2 class="text-center p-2 m-0 fw-bold rounded-pill shadow-lg subtitulos animate__animated animate__pulse">
-                        This account
-                    </h2>
-                    
-                    <div 
-                        class="text-start p-2 m-0 rounded"
-                        style="color: #FFC23C; background-color: #666; border: 2px solid #FFC23C;">
-                        <p class="">Account : {{id}}</p>
-                        <p class="">Number account : {{numeroDeCuenta}}</p>
-                        <p class="">Creation Date: {{fechaDeCreacion}}</p>
-                        <p class="">Balance : ${{balance}}</p>
-                     </div>
-
-                    <h2 class="text-center p-2 m-0 mt-2 fw-bold rounded-pill shadow-lg subtitulos animate__animated animate__pulse">
-                        Transaction List
-                    </h2>
-
-                    <div 
-                        class="mt-4 mx-auto py-2 px-4 rounded rounded-pill animate__animated animate__headShake" 
-                        style="background-color: #666; border: 2px solid #FFC23C;" 
-                        v-if="transacciones.length == 0">
-                        <h2 
-                            class=" fw-bold m-0 text-nowrap"
-                            style="color: #FFC23C;"
-                            >No transactions yet...
-                        </h2>
-                    </div>
-
-                    <div class="table-responsive rounded animate__animated animate__fadeIn" v-else>
-                        <table class="table table-light table-striped table-hover mb-0">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Hour</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <template v-for="transaccion in transacciones">
-                                    <tr>
-                                        <td>{{transaccion.id}}</td>
-                                        <td
-                                        :class="[transaccion.type.includes('CREDIT') ? 'text-success' : 'text-danger']">
-                                        {{transaccion.type}}</td>
-                                        <td
-                                        :class="[transaccion.type.includes('CREDIT') ? 'text-success' : 'text-danger']">
-                                        {{transaccion.amount}}</td>
-                                        <td>{{transaccion.description}}</td>
-                                        <td class="text-nowrap">{{transaccion.date.substring(0,10)}}</td>
-                                        <td>{{transaccion.date.substring(11,16) + "hs."}}</td>
-                                    </tr>
+                            <p class="m-0">Step 2: Select source account.</p>
+                            <select class="form-select" v-model="cuentaOrigen">
+                                <option value="" disabled >Select account</option>
+                                
+                                <template v-for="cuenta in cuentas">
+                                    <option :value="cuenta.number">{{cuenta.number}}</option>
                                 </template>
                                 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                -->
+                            </select>
 
+                            <p class="m-0">Step 3: Select destination account.</p>
+                            <select class="form-select" v-model="cuentaDestino">
+                                <option value="" disabled >Select account</option>
+                                
+                                {{mostrarCuentasRestantes}}
+
+                                <template v-for="cuenta in cuentasRestantes">
+                                    <option :value="cuenta.number">{{cuenta.number}}</option>
+                                
+                                </template>
+                            </select>
+
+                            <p class="m-0">Step 4: Select amount to transaction.</p>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-control" v-model="montoTransferencia">
+                                <span class="input-group-text">.00</span>
+                              </div>
+
+                            <p class="m-0">Step 5: Select amount to transaction.</p>
+                            <div class="input-group">
+                                <span class="input-group-text">Description</span>
+                                <textarea class="form-control" v-model="descripcion" style="resize: none;"></textarea>
+                            </div>
+
+                            <p class="m-0">Step Final: Apply!</p>
+                            <button class="btn" type="button" @click="realizarTransacion()">Make transaction</button>
+          
+
+                        </template>
+
+
+                    </div>
+                </form>
+
+            </div>
+
+            
         </main>
 
         <footer class="mt-auto flex flex-column">
@@ -372,9 +280,14 @@
     </div>
 
     <!--bootstrapJS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
+    <script 
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" 
+        crossorigin="anonymous">
+    </script>
+
+    <!--sweetalert-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!--VueJs-->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -382,7 +295,8 @@
     <!--axios-->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <!--accountJS-->
-    <script src="/assets/scripts/account.js"></script>
+    <!--accountsJS-->
+    <script src="/assets/scripts/transfers.js"></script>
 </body>
+
 </html>
