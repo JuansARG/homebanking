@@ -36,12 +36,10 @@ createApp({
                     Swal.fire({
                         icon: "success",
                         text: "Will be redirected, see you soon.",
-                    }).then(r => {
+                    }).then(() => {
                         axios.post("http://localhost:8080/api/logout")
-                        .then(r => {
-                            location.href = "http://localhost:8080/web/login.html"
-                        })
-                        .catch(e => console.log(e));
+                            .then(() => location.href = "http://localhost:8080/web/login.html")
+                            .catch(e => console.log(e));
                     })
                 }
             }).catch(e => console.log(e));
@@ -59,11 +57,9 @@ createApp({
                     Swal.fire({
                         icon: "success",
                         text: "Your account has been created.",
-                    }).then(r => {
+                    }).then(() => {
                         axios.post("http://localhost:8080/api/clients/current/accounts")
-                        .then(r => {
-                            location.reload();
-                        })
+                        .then(() => location.reload())
                         .catch(e => console.log(e));
                     })
                 } 

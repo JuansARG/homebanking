@@ -16,7 +16,7 @@ createApp({
     },
     methods: {
         login() {
-            axios.post('http://localhost:8080/api/login', "email=" + this.email + "&password=" + this.password)
+            axios.post('http://localhost:8080/api/login', `email=${this.email}&password=${this.password}`)
                 .then(response => {
                     location.href = "http://localhost:8080/web/accounts.html";
                 })
@@ -85,25 +85,29 @@ createApp({
             }).then(r => {
                 if (r.isConfirmed){
                     axios.post('http://localhost:8080/api/clients', 
-                        "firstname=" + this.firstName +
-                        "&lastname=" + this.lastName +
-                        "&email=" + this.email +
-                        "&password=" + this.password)
+                        `firstname=${this.firstName}&lastname=${this.lastName}&email=${this.email}&password=${this.password}`)
                     .then(r =>{
                         Swal.fire({
                             icon: "success",
                             text: "Your account has been created.",
-                        }).then(r => {
-                            axios.post("http://localhost:8080/api/clients/current/accounts")
-                                .then(r => {
-                                    Swal.fire({
-                                        icon: "success",
-                                        text: "You will be redirected to another page.",
-                                    }).then(r =>{
-                                        location.href = "http://localhost:8080/web/accounts.html";
+                        }).then(() => {
+                            
+                            axios.post('http://localhost:8080/api/login', `email=${this.email}&password=${this.password}`)
+                                .then(() => {
+                                    
+                                    axios.post("http://localhost:8080/api/clients/current/accounts")
+                                        .then(() => {
+                                            Swal.fire({
+                                                icon: "success",
+                                                text: "You will be redirected to another page.",
+                                            }).then(r =>{
+                                                location.href = "http://localhost:8080/web/accounts.html";
+                                            })
+                                        })
+                                        .catch(e => console.log(e))
+
                                     })
-                                })
-                                .catch(e => console.log(e));
+                                .catch(e => console.log(e));                            
                         })
                     })
                     .catch(e => console.log(e));

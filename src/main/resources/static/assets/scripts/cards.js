@@ -17,6 +17,7 @@ createApp({
         cargarDatos(){
             axios.get("http://localhost:8080/api/clients/current")
                 .then(respuesta => {
+
                     this.json = respuesta;
                     this.cliente = this.json.data;
                     this.tarjetas = this.cliente.cards;
@@ -24,9 +25,11 @@ createApp({
                     this.tarjetasDebito = this.tarjetas.filter(tarjeta => tarjeta.type == "DEBIT")                 
                 })
                 .catch(e => console.log(e));
+                
         },
 
         logout(){
+
             Swal.fire({
                 title: 'Are you sure?',
                 text: "",
@@ -40,9 +43,7 @@ createApp({
                         text: "Will be redirected, see you soon.",
                     }).then(r => {
                         axios.post("http://localhost:8080/api/logout")
-                        .then(r => {
-                            location.href = "http://localhost:8080/web/login.html"
-                        })
+                        .then(() => location.href = "http://localhost:8080/web/login.html")
                         .catch(e => console.log(e));
                     })
                 }

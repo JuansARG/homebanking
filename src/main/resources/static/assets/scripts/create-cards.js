@@ -17,6 +17,7 @@ createApp({
     methods: {
 
         cargarDatos() {
+
             axios.get("http://localhost:8080/api/clients/current")
                 .then(respuesta => {
                     this.cliente = respuesta.data;
@@ -32,18 +33,15 @@ createApp({
         },
 
         solicitarTarjeta() {
-            if (this.typeCard.length == 0 || this.colorCard.length == 0) {
 
+            if (this.typeCard.length == 0 || this.colorCard.length == 0) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Invalid fields!'
                 })
-
             } else {
-
                 let fn = e => e.color;
-
                 if(this.typeCard == "DEBIT"){
                     let coloresDebito = this.tarjetasDebito.map(fn);
                     if(coloresDebito.includes(this.colorCard)){
@@ -86,13 +84,10 @@ createApp({
                     Swal.fire({
                         icon: "success",
                         text: "Your card has been requested.",
-                    }).then(r => {
+                    }).then(() => {
                         axios.post("http://localhost:8080/api/clients/current/cards", 
-                            "type=" + this.typeCard +
-                            "&color=" + this.colorCard)
-                            .then(r => {
-                                location.href = "http://localhost:8080/web/cards.html";
-                            })
+                            `type=${this.typeCard}&color=${this.colorCard}`)
+                            .then(() => location.href = "http://localhost:8080/web/cards.html")
                             .catch(e => console.log(e));
                     })
                 }
@@ -113,11 +108,9 @@ createApp({
                     Swal.fire({
                         icon: "success",
                         text: "Will be redirected, see you soon.",
-                    }).then(r => {
+                    }).then(() => {
                         axios.post("http://localhost:8080/api/logout")
-                            .then(r => {
-                                location.href = "http://localhost:8080/web/login.html"
-                            })
+                            .then(() => location.href = "http://localhost:8080/web/login.html")
                             .catch(e => console.log(e));
                     })
                 }

@@ -61,6 +61,7 @@ main{
     background-color: rgba(255, 255, 255, 0.30);
     backdrop-filter: blur( 4px);
     border: 1px solid  rgba(255, 255, 255, 0.18);
+    max-width: 960px!important;
 }
 
 .swal2-cancel {
@@ -85,12 +86,23 @@ main{
     color: #FFC23C;
     background-color: #100720;
     border: solid 2px #FFC23C;
+    width: 50%!important;
 }
 
 .btn:hover{
     color: #100720;
     background-color: #FFC23C!important;
     border-color: #100720;
+}
+
+.form-control:focus{
+    border-color: #100720!important;
+    box-shadow: 0 0 0 0.25rem #FFC23C!important;
+}
+
+.form-select:focus{
+    border-color: #100720!important;
+    box-shadow: 0 0 0 0.25rem #FFC23C!important;
 }
 
 footer{

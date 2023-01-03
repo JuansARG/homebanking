@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/api")
 public class TransactionController {
@@ -41,11 +43,7 @@ public class TransactionController {
                                                     Authentication auth){
 
         Client currentClient = clientRepository.findByEmail(auth.getName());
-        ClientDTO currentClientDTO = new ClientDTO(currentClient);
-
         Account rootAccount = accountRepository.findByNumber(numberRootAccount);
-        AccountDTO rootAccountDTO;
-
 
         if(amount == 0 || description.isEmpty() || numberRootAccount.isEmpty() || numberDestinationAccount.isEmpty()){
             return new ResponseEntity<>("Incomplete fields.", HttpStatus.FORBIDDEN);
@@ -58,12 +56,9 @@ public class TransactionController {
 
         if(rootAccount == null){
             return new ResponseEntity<>("The source account does not exist.", HttpStatus.FORBIDDEN);
-        }else{
-            rootAccountDTO = new AccountDTO(rootAccount);
         }
 
-        //ARREGLAR ESTE CONDICIONAL, NESESITO COMPROBAR SI LA CUENTA EXISTE DENTRO DE LAS ACCOUNTS DEL CLIENTE AUTENTICADO
-        if(currentClientDTO.getAccount().stream().noneMatch(account -> account.getId().equals(rootAccount.getId()))){
+        if(currentClient.getAccounts().stream().noneMatch(account -> account.getId().equals(rootAccount.getId()))){
             return new ResponseEntity<>("The source account does not belong to the authenticated client.", HttpStatus.FORBIDDEN);
         }
 
@@ -77,8 +72,8 @@ public class TransactionController {
             return new ResponseEntity<>("Insufficient funds.", HttpStatus.FORBIDDEN);
         }
 
-        Transaction transaction1 = new Transaction(TransactionType.DEBIT, amount, description + " -> " + destinationAccount.getNumber(), rootAccount);
-        Transaction transaction2 = new Transaction(TransactionType.CREDIT, amount, description + " -> " + rootAccount.getNumber(), destinationAccount);
+        Transaction transaction1 = new Transaction(TransactionType.DEBIT, amount, description + " -> " + destinationAccount.getNumber(), LocalDateTime.now(), rootAccount);
+        Transaction transaction2 = new Transaction(TransactionType.CREDIT, amount, description + " -> " + rootAccount.getNumber(), LocalDateTime.now(), destinationAccount);
 
         transactionRepository.save(transaction1);
         transactionRepository.save(transaction2);

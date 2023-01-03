@@ -18,9 +18,10 @@ createApp({
     },
     methods: {
         cargarDatos() {
+
             this.id = new URLSearchParams(document.location.search).get("id");
             axios.get("http://localhost:8080/api/clients/current")
-                .then((respuesta) => {
+                .then(respuesta => {
                     this.json = respuesta;
                     this.cliente = this.json.data;
                     this.cuenta = respuesta.data.account.find(cuenta => cuenta.id == this.id);
@@ -30,6 +31,7 @@ createApp({
                     this.transacciones = this.cuenta.transactions.sort((a, b) => a.id - b.id);
                 })
                 .catch(e => console.log(e));
+                
         },
 
         logout(){
@@ -45,12 +47,10 @@ createApp({
                     Swal.fire({
                         icon: "success",
                         text: "Will be redirected, see you soon.",
-                    }).then(r => {
+                    }).then(() => {
                         axios.post("http://localhost:8080/api/logout")
-                        .then(r => {
-                            location.href = "http://localhost:8080/web/login.html"
-                        })
-                        .catch(e => console.log(e));
+                            .then(() => location.href = "http://localhost:8080/web/login.html")
+                            .catch(e => console.log(e));
                     })
                 }
             }).catch(e => console.log(e));

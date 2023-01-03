@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -53,7 +54,7 @@ public class CardController {
             if (cardsTypeTarget.size() == 3){
                 return new ResponseEntity<>("You already have 3 accounts of the requested type", HttpStatus.FORBIDDEN);
             }else{
-                Card newCard = new Card(currentClient, type, color, RandomNum.getRandonNumber4CardNum(), RandomNum.getRandomNum4CVV());
+                Card newCard = new Card(currentClient, type, color, RandomNum.getRandonNumber4CardNum(), RandomNum.getRandomNum4CVV(), LocalDate.now());
                 cardRepository.save(newCard);
                 return new ResponseEntity<>(HttpStatus.CREATED);
             }

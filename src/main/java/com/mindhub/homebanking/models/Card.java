@@ -31,14 +31,14 @@ public class Card {
 
     }
 
-    public Card(Client client, CardType type, CardColor color, String number, Integer cvv){
+    public Card(Client client, CardType type, CardColor color, String number, Integer cvv, LocalDate thruDate){
         cardHolder = client.getLastName() + " " + client.getFirstName();
         this.type = type;
         this.color = color;
         this.number = number;
         this.cvv = cvv;
-        thruDate = LocalDate.now();
-        fromDate = thruDate.plusYears(5);
+        this.thruDate = thruDate;
+        this.fromDate = thruDate.plusYears(5);
         this.client = client;
     }
 

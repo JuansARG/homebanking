@@ -30,12 +30,12 @@ public class ClientLoan {
 
     }
 
-    public ClientLoan(Double amount, Integer payments, Client client, Loan loan) {
+    public ClientLoan(Double amount, Integer payments, Client client, Loan loan, LocalDate applicationDate) {
         this.amount = amount;
         this.payments = payments;
         this.client = client;
         this.loan = loan;
-        this.applicationDate = LocalDate.now();
+        this.applicationDate = applicationDate;
     }
 
     public Long getId() {

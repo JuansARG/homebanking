@@ -80,7 +80,7 @@
 
     <main class="d-flex align-items-center p-2">
 
-        <div class="container d-flex flex-column align-items-center p-2 rounded login">
+        <div class="container d-flex flex-column align-items-center p-2 rounded login my-3">
             <div class="d-flex flex-column align-items-center px-4 py-2">
                 <svg 
                     xmlns="http://www.w3.org/2000/svg" 
@@ -95,14 +95,14 @@
                 <h4 class="m-0 fw-bold">Old Owl App</h4>
             </div>
 
-            <form action="/api/login" method="post" class="d-flex flex-column gap-4 my-2" v-if="mostrarRegistro">
+            <form class="d-flex flex-column gap-4 my-2" v-if="mostrarRegistro">
                 <div class="d-flex flex-column gap-3">
                     <div class="form-floating">
-                        <input type="email" class="form-control" placeholder="name@example.com" required v-model="email">
+                        <input type="email" class="form-control" placeholder="name@example.com" v-model="email">
                         <label for="email">Email</label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" placeholder="Password" required v-model="password">
+                        <input type="password" class="form-control" placeholder="Password" v-model="password">
                         <label>Password</label>
                     </div>
                     <button class="btn" type="button" @click="login()">Sing in</button>
@@ -113,23 +113,29 @@
                 </div>
             </form>
 
-            <form action="/api/login" method="post" class="d-flex flex-column gap-4 my-2" v-else>
+            <form class="d-flex flex-column gap-4 my-2" v-else>
                 <div class="d-flex flex-column gap-3">
                     <div class="form-floating">
-                        <input type="email" class="form-control" placeholder="name@example.com" required v-model="firstName">
+                        <input type="email" class="form-control" placeholder="name@example.com" v-model="firstName">
                         <label>First Name</label>
                     </div>
                     <div class="form-floating">
-                        <input type="email" class="form-control" placeholder="name@example.com" required v-model="lastName">
+                        <input type="email" class="form-control" placeholder="name@example.com" v-model="lastName">
                         <label>Last Name</label>
                     </div>
                     <div class="form-floating">
-                        <input type="email" class="form-control" placeholder="name@example.com" required v-model="email">
+                        <input type="email" class="form-control" placeholder="name@example.com" v-model="email">
                         <label>Email</label>
                     </div>
+                    <p class="m-0 fw-semibold">Warning: Password must be at least 8 characters.</p>
+
                     <div class="form-floating">
-                        <input type="password" class="form-control" placeholder="Password" required v-model="password">
+                        <input type="password" class="form-control" placeholder="Password" v-model="password">
                         <label>Password</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" placeholder="Password" v-model="confirmPassword">
+                        <label>Confirm password</label>
                     </div>
                     <button class="btn" type="button" @click="registrar()">Create Account</button>
                 </div>

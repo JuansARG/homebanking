@@ -3,7 +3,6 @@ package com.mindhub.homebanking.models;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,9 +24,9 @@ public class Account {
 
     public Account() {
     }
-    public Account(String number, double balance, Client owner) {
+    public Account(String number, double balance, LocalDate creationDate, Client owner) {
         this.number = "VIN-" + number;
-        this.creationDate = LocalDate.now();
+        this.creationDate = creationDate;
         this.balance = balance;
         this.client = owner;
     }

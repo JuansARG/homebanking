@@ -25,13 +25,15 @@ public class Transaction {
     public Transaction(){
 
     }
-    public Transaction(TransactionType type, double amount, String description, Account account) {
+    public Transaction(TransactionType type, double amount, String description, LocalDateTime date, Account account) {
         this.type = type;
         this.amount = amount;
         this.description = description;
-        this.date = LocalDateTime.now();
+        this.date = date;
         this.account = account;
     }
+
+
 
     public Long getId() {
         return id;

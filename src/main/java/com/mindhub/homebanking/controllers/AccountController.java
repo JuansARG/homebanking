@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +45,7 @@ public class AccountController {
         if (currentClient.getAccounts().size() == 3){
             return new ResponseEntity<>("This customer already has 3 accounts", HttpStatus.FORBIDDEN);
         }else{
-            Account newAccount = new Account(RandomNum.getRandomNumber4Vin(), 0, currentClient);
+            Account newAccount = new Account(RandomNum.getRandomNumber4Vin(), 0, LocalDate.now(), currentClient);
             accountRepository.save(newAccount);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
