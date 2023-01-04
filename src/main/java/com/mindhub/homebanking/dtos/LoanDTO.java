@@ -7,15 +7,21 @@ import java.util.List;
 
 public class LoanDTO {
 
+    private Long id;
     private String name;
     private Double maxAmount;
     @ElementCollection
     private List<Integer> payments;
 
     public LoanDTO(Loan loan){
+        this.id = loan.getId();
         this.name = loan.getName();
         this.maxAmount = loan.getMaxAmount();
         this.payments = loan.getPayments();
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {

@@ -142,50 +142,37 @@
 
                         
                         <template v-if="tipoTransferencia == `propia`">
-
                             <p class="m-0">Step 2: Select source account.</p>
                             <select class="form-select" v-model="cuentaOrigen">
                                 <option value="" disabled >Select account</option>
-                                
                                 <template v-for="cuenta in cuentas">
                                     <option :value="cuenta.number">{{cuenta.number}}</option>
                                 </template>
-                                
                             </select>
-
                             <p class="m-0">Step 3: Select destination account.</p>
                             <select class="form-select" v-model="cuentaDestino">
                                 <option value="" disabled >Select account</option>
-                                
                                 {{mostrarCuentasRestantes}}
-
                                 <template v-for="cuenta in cuentasRestantes">
                                     <option :value="cuenta.number">{{cuenta.number}}</option>
-                                
                                 </template>
                             </select>
-
                             <p class="m-0">Step 4: Select amount to transaction.</p>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">$</span>
                                 <input type="number" class="form-control" v-model="montoTransferencia">
                                 <span class="input-group-text">.00</span>
-                              </div>
-
+                            </div>
                             <p class="m-0">Step 5: Insert a short description.</p>
                             <div class="input-group">
                                 <span class="input-group-text">Description</span>
                                 <textarea class="form-control" v-model="descripcion" style="resize: none;"></textarea>
                             </div>
-
                             <p class="m-0">Step Final: Apply!</p>
                             <button class="btn m-auto" type="button" @click="realizarTransacion()">Make transaction</button>
-          
-
                         </template>
 
                         <template v-if="tipoTransferencia == `tercero`">
-
                             <p class="m-0">Step 2: Select source account.</p>
                             <select class="form-select" v-model="cuentaOrigen">
                                 <option value="" disabled >Select account</option>
@@ -193,32 +180,26 @@
                                 <template v-for="cuenta in cuentas">
                                     <option :value="cuenta.number">{{cuenta.number}}</option>
                                 </template>
-                                
+                            
                             </select>
-
                             <p class="m-0">Step 3: Enter the destination account number.</p>
                             <div class="form-floating">
                                 <input type="text" class="form-control" placeholder="Number Account" v-model="cuentaDestino">
                                 <label>Account number</label>
                             </div>
-
                             <p class="m-0">Step 4: Select amount to transaction.</p>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">$</span>
                                 <input type="number" class="form-control" v-model="montoTransferencia">
                                 <span class="input-group-text">.00</span>
-                              </div>
-
+                            </div>
                             <p class="m-0">Step 5: Insert a short description.</p>
                             <div class="input-group">
                                 <span class="input-group-text">Description</span>
                                 <textarea class="form-control" v-model="descripcion" style="resize: none;"></textarea>
                             </div>
-
                             <p class="m-0">Step Final: Apply!</p>
                             <button class="btn m-auto" type="button" @click="realizarTransacion()">Make transaction</button>
-          
-
                         </template>
 
 

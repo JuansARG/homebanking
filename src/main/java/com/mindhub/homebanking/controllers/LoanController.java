@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,14 +29,16 @@ public class LoanController {
     ClientRepository clientRepository;
     @Autowired
     TransactionRepository transactionRepository;
+    @Autowired
+    ClientLoanRepository clientLoanRepository;
 
-    @RequestMapping("/loans")
+    @GetMapping("/loans")
     public List<LoanDTO> getLoans(){
-        return loanRepository.findAll().stream().map(loan -> new LoanDTO(loan)).toList();
+        return loanRepository.findAll().stream().map(LoanDTO::new).toList();
     }
 
     @Transactional
-    @RequestMapping(path = "/loans", method = RequestMethod.POST)
+    @PostMapping("/loans")
     public ResponseEntity<Object> requestLoan(@RequestBody LoanApplicationDTO loanApplicationDTO, Authentication auth){
 
         Client currentClient = clientRepository.findByEmail(auth.getName());
@@ -77,6 +80,9 @@ public class LoanController {
 
         destinationAccount.setBalance(destinationAccount.getBalance() + loanApplicationDTO.getAmount());
         accountRepository.save(destinationAccount);
+
+        ClientLoan clientLoan = new ClientLoan(loanApplicationDTO.getAmount(), loanApplicationDTO.getPayments(), currentClient, currentLoan, LocalDate.now());
+        clientLoanRepository.save(clientLoan);
 
         return new ResponseEntity<>("Everything has gone well!", HttpStatus.CREATED);
     }

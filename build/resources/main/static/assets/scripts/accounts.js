@@ -16,7 +16,7 @@ createApp({
     methods: {
         cargarDatos() {;
             axios.get("http://localhost:8080/api/clients/current")
-                .then(() => {
+                .then(respuesta => {
                     this.cliente = respuesta.data;
                     this.cuentas = this.cliente.account;
                     this.prestamos = this.cliente.loans.sort((a, b) => a.id - b.id);
@@ -38,8 +38,8 @@ createApp({
                         text: "Will be redirected, see you soon.",
                     }).then(() => {
                         axios.post("http://localhost:8080/api/logout")
-                        .then(() => location.href = "http://localhost:8080/web/login.html")
-                        .catch(e => console.log(e));
+                            .then(() => location.href = "http://localhost:8080/web/login.html")
+                            .catch(e => console.log(e));
                     })
                 }
             }).catch(e => console.log(e));
@@ -57,7 +57,7 @@ createApp({
                     Swal.fire({
                         icon: "success",
                         text: "Your account has been created.",
-                    }).then(r => {
+                    }).then(() => {
                         axios.post("http://localhost:8080/api/clients/current/accounts")
                         .then(() => location.reload())
                         .catch(e => console.log(e));
