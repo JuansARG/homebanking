@@ -19,10 +19,12 @@ createApp({
     },
     methods: {
         cargarDatos() {
-            axios.get("http://localhost:8080/api/clients")
+            axios.get("http://localhost:8080/rest/clients")
                 .then((respuesta) => {
+                    console.log(respuesta)
                     this.data = respuesta.data;
-                    this.clientes = respuesta.data;
+                    this.clientes = respuesta.data._embedded.clients;
+                    console.log(this.clientes)
                     this.uri = "http://localhost:8080/rest/clients/";
                 })
                 .catch(e => console.log(e));

@@ -72,10 +72,11 @@ main {
     background-color: #FFC23C;
 }
 
-.form-control:focus{
+.form-control:focus, .form-select:focus{
     border-color: #100720!important;
     box-shadow: 0 0 0 0.25rem #FFC23C!important;
 }
+
 
 .login{
     width: 25rem;

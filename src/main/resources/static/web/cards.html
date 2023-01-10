@@ -134,7 +134,7 @@
                 </h2>
             </div>
 
-            <div class="container p-2 rounded">
+            <div class="container p-2 rounded animate__animated animate__fadeIn">
 
                 <h2 class="text-center py-1 m-0 my-2 fw-bold border border-warning">Your cards:</h2>
                 <div v-if="tarjetas.length == 0">
@@ -160,7 +160,7 @@
                             <h2 class="m-0 fw-semibold text-decoration-underline">Credit Cards:</h2>
                             
                             <template v-for="tarjeta in tarjetasCredito">
-                                <div class="d-flex flex-column gap-2 col-12 col-lg-10 col-xl-8 col-xxl-7 shadow-lg animate__animated animate__flipInY">
+                                <div class="d-flex flex-column gap-2 col-12 col-lg-10 col-xl-8 col-xxl-7 shadow-lg animate__animated animate__flipInY animate__delay-1s">
                                     <div
                                         style="height: 13rem;"
                                         :class="[
@@ -219,8 +219,8 @@
                                                         viewBox="0 0 16 16">
                                                         <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
                                                         <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
-                                                      </svg>
-                                                      <p class="m-0 fw-bold text-center" style="font-size: .8rem;">{{tarjeta.type}}</p>
+                                                    </svg>
+                                                    <p class="m-0 fw-bold text-center" style="font-size: .8rem;">{{tarjeta.type}}</p>
                                                 </span>
                                             </div>
                                         </div>
@@ -252,7 +252,7 @@
                             <h2 class="m-0 fw-semibold text-decoration-underline">Debit Cards:</h2>
                             
                             <template v-for="tarjeta in tarjetasDebito">
-                                <div class="d-flex flex-column gap-2 col-12 col-lg-10 col-xl-8 col-xxl-7 shadow-lg animate__animated animate__flipInY">
+                                <div class="d-flex flex-column gap-2 col-12 col-lg-10 col-xl-8 col-xxl-7 shadow-lg animate__animated animate__flipInY animate__delay-1s">
                                     <div
                                         style="height: 13rem;"
                                         :class="[

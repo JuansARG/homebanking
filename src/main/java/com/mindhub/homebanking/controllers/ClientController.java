@@ -1,35 +1,31 @@
 package com.mindhub.homebanking.controllers;
+
 import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
 public class ClientController {
 
     @Autowired
-    private ClientRepository clientRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private ClientService clientService;
 
     @RequestMapping("/clients")
     public List<ClientDTO> getClients(){
-        return clientRepository.findAll().stream().map(client -> new ClientDTO(client)).collect(Collectors.toList());
+        return clientService.clientsToClientsDTO(clientService.getAllClients());
     }
 
     @RequestMapping("/clients/{id}")
     public ClientDTO getClient(@PathVariable Long id) {
-        return clientRepository.findById(id).map(client -> new ClientDTO(client)).orElse(null);
+        return clientService.clientToClientDTO(clientService.getClientById(id));
     }
 
 
@@ -55,18 +51,18 @@ public class ClientController {
             return new ResponseEntity<>("Password is empty", HttpStatus.FORBIDDEN);
         }
 
-        if(clientRepository.findByEmail(email) != null){
+        if(clientService.getClientByEmail(email) != null){
             return new ResponseEntity<>("Email already in use", HttpStatus.CONFLICT);
         }
 
-        Client client = new Client(firstname, lastname, email, passwordEncoder.encode(password));
-        clientRepository.save(client);
+        Client client = clientService.createClient(firstname, lastname, email, password);
+        clientService.saveClient(client);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping("/clients/current")
     public ClientDTO getClient(Authentication auth){
-        return new ClientDTO(clientRepository.findByEmail(auth.getName()));
+        return clientService.clientToClientDTO(clientService.getClientByEmail(auth.getName()));
     }
 
 

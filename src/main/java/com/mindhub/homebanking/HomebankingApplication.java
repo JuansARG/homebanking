@@ -71,17 +71,17 @@ public class HomebankingApplication {
 			List<Integer> paymentsPersonalLoan = List.of(6, 12, 24);
 			List<Integer> paymentsCarLoan = List.of(6, 12, 24, 36);
 
-			Loan mortgageLoan = new Loan("Mortgage Loan", 500000D, paymentsMortgageLoan);
 			Loan personalLoan = new Loan("Personal Loan", 100000D, paymentsPersonalLoan);
 			Loan carLoan = new Loan("Car Loan", 300000D, paymentsCarLoan);
+			Loan mortgageLoan = new Loan("Mortgage Loan", 500000D, paymentsMortgageLoan);
 
 			List<Loan> loanList = List.of(mortgageLoan, personalLoan, carLoan);
 			loanRepository.saveAll(loanList);
 
-			ClientLoan clientLoan1 = new ClientLoan(400000D, 60, client1, mortgageLoan, LocalDate.now());
-			ClientLoan clientLoan2 = new ClientLoan(50000D, 12, client1, personalLoan, LocalDate.now());
-			ClientLoan clientLoan3 = new ClientLoan(100000D, 24, client2, personalLoan, LocalDate.now());
-			ClientLoan clientLoan4 = new ClientLoan(200000D, 36, client2, carLoan, LocalDate.now());
+			ClientLoan clientLoan1 = new ClientLoan(400000D, 400000D * 1.2, 60, client1, mortgageLoan, LocalDate.now());
+			ClientLoan clientLoan2 = new ClientLoan(50000D, 50000D * 1.2, 12, client1, personalLoan, LocalDate.now());
+			ClientLoan clientLoan3 = new ClientLoan(100000D, 100000D * 1.2, 24, client2, personalLoan, LocalDate.now());
+			ClientLoan clientLoan4 = new ClientLoan(200000D, 200000D * 1.2, 36, client2, carLoan, LocalDate.now());
 
 			List<ClientLoan> clientLoanList = List.of(clientLoan1, clientLoan2, clientLoan3, clientLoan4);
 			clientLoanRepository.saveAll(clientLoanList);

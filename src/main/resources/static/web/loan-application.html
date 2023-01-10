@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <!--css-->
-    <link rel="stylesheet" href="/assets/styles/create-cards.css">
+    <link rel="stylesheet" href="/assets/styles/loan-application.css">
 
-    <title>Create Card</title>
+    <title>Request Loan</title>
 </head>
 <body>
 
@@ -65,17 +65,8 @@
 
                     <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarTogglerDemo03">
                         <ul class="navbar-nav my-2 mb-lg-0 d-flex gap-2">
-                            <li class="nav-item">
-                                <a 
-                                    class="nav-link d-flex gap-1 align-items-center" 
-                                    aria-current="page" 
-                                    href="http://localhost:8080/web/home.html"
-                                    style="padding: .5rem; font-size: .8rem;">
-                                    Home
-                                </a>
-                            </li>
                             <li class="nav-item ">
-                                <a 
+                                <a
                                     href="http://localhost:8080/web/accounts.html"
                                     class="nav-link d-flex gap-1 align-items-center"
                                     style="padding: .5rem; font-size: .8rem;">
@@ -83,7 +74,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a 
+                                <a
                                     href="http://localhost:8080/web/transfers.html"
                                     class="nav-link d-flex gap-1 align-items-center"
                                     style="padding: .5rem; font-size: .8rem;">
@@ -91,7 +82,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a 
+                                <a
                                     href="http://localhost:8080/web/cards.html"
                                     class="nav-link d-flex gap-1 align-items-center"
                                     style="padding: .5rem; font-size: .8rem;">
@@ -99,11 +90,19 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a 
+                                <a
                                     href="http://localhost:8080/web/cards.html"
-                                    class="nav-link d-flex gap-1 align-items-center text-nowrap active"
+                                    class="nav-link d-flex gap-1 align-items-center text-nowrap"
                                     style="padding: .5rem; font-size: .8rem;">
                                     Request new card
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    href="#"
+                                    class="nav-link d-flex gap-1 align-items-center text-nowrap active"
+                                    style="padding: .5rem; font-size: .8rem;">
+                                    Request new loan
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -124,41 +123,59 @@
 
     <main class="d-flex align-items-center p-2">
 
-        <div class="container d-flex flex-column align-items-center p-2 rounded login animate__animated animate__fadeIn">
+        <div class="container d-flex flex-column align-items-center p-2 rounded loan-apply animate__animated animate__fadeIn">
             <div class="d-flex flex-column align-items-center px-4 py-2">
                 <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     width="60" height="60" 
                     fill="currentColor" 
-                    class="bi bi-credit-card-2-back-fill" 
+                    class="bi bi-person-circle" 
                     viewBox="0 0 16 16">
-                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5H0V4zm11.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zM0 11v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1H0z"/>
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                 </svg>
-                <h4 class="m-0 mt-2 fw-bold text-center">Request Card</h4>
+                <h4 class="mt-3 fw-bold">{{cliente.lastName + " " + cliente.firstName}}</h4>
+                <h4 class="m-0 fw-bold text-center">Request loan</h4>
             </div>
 
             <form class="d-flex flex-column gap-4 my-2 animate__animated animate__fadeIn">
                 <div class="d-flex flex-column gap-3">
-                    <p class="m-0">Step 1: Select card type.</p>
-                    <select class="form-select" v-model="typeCard">
-                        <option value="" disabled>Select Type Card</option>
-                        <option value="CREDIT">Credit</option>
-                        <option value="DEBIT">Debit</option>
+                    <p class="m-0">Step 1: Select loan type.</p>
+                    <select class="form-select" v-model="nombrePrestamoSeleccionado">
+                        <option value="" disabled>Select Type Loan</option>
+                        <template v-for="prestamo of tiposDePrestamos">
+                            <option :value="prestamo.name">{{prestamo.name}}</option>
+                        </template>
                     </select>
-                    <p class="m-0">Step 2: Select card color.</p>
-                    <select class="form-select" v-model="colorCard">
-                        <option value="" disabled>Select Color Card</option>
-                        <option value="TITANIUM">Titanium</option>
-                        <option value="GOLD">Gold</option>
-                        <option value="SILVER">Silver</option>
+                    <p class="m-0">Step 2: Enter an amount..</p>
+                    <template v-if="nombrePrestamoSeleccionado != `` ">
+                        <p class="m-0">Max amount: {{montoMaximo}}</p>
+                    </template>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">$ </span>
+                        
+                        <input type="number" class="form-control" :placeholder="montoSolicitado" v-model="montoSolicitado">                    
+                    </div>
+                    {{mostrarCuotas}}
+                    <p class="m-0">Step 3: Select a number of installments.</p>
+                    <select class="form-select" v-model="cuotasSeleccionadas">
+                        <option value="" disabled>Quotas available</option>
+                        <template v-for="cuotas of cuotasDisponibles">
+                            <option :value="cuotas">{{cuotas}}</option>
+                        </template>
                     </select>
-                    <p class="m-0">Step 3: Apply for card.</p>
-                    <button class="btn" type="button" @click="solicitarTarjeta()">Apply</button>
+                    <p class="m-0">Step 4: Select the account where you want to deposit the requested amount.</p>
+                    <select class="form-select" v-model="numeroDeCuentaSeleccionada">
+                        <option value="" disabled>Select one of your accounts.</option>
+                        <template v-for="cuenta of cuentas">
+                            <option :value="cuenta.number">{{cuenta.number}}</option>
+                        </template>
+                    </select>
+                    <p class="m-0">Step 5: Apply for loan.</p>
+                    <button class="btn" type="button" @click="solicitarPrestamo()">Apply</button>
                 </div>
             </form>
-
         </div>
-
     </main>
 
 
@@ -264,7 +281,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <!--managerJS-->
-    <script src="/assets/scripts/create-cards.js"></script>
+    <script src="/assets/scripts/loan-application.js"></script>
 
 </body>
 

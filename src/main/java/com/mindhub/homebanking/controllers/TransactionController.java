@@ -1,14 +1,12 @@
 package com.mindhub.homebanking.controllers;
 
-import com.mindhub.homebanking.dtos.AccountDTO;
-import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.models.Transaction;
 import com.mindhub.homebanking.models.TransactionType;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
-import com.mindhub.homebanking.repositories.TransactionRepository;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.ClientService;
+import com.mindhub.homebanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,13 +24,13 @@ import java.time.LocalDateTime;
 public class TransactionController {
 
     @Autowired
-    private AccountRepository accountRepository;
+    private ClientService clientService;
 
     @Autowired
-    private ClientRepository clientRepository;
+    private AccountService accountService;
 
     @Autowired
-    private TransactionRepository transactionRepository;
+    private TransactionService transactionService;
 
     @Transactional
     @PostMapping("/transactions")
@@ -42,8 +40,8 @@ public class TransactionController {
                                                     @RequestParam String numberDestinationAccount,
                                                     Authentication auth){
 
-        Client currentClient = clientRepository.findByEmail(auth.getName());
-        Account rootAccount = accountRepository.findByNumber(numberRootAccount);
+        Client currentClient = clientService.getClientByEmail(auth.getName());
+        Account rootAccount = accountService.getAccountByNumber(numberRootAccount);
 
         if(amount == 0 || description.isEmpty() || numberRootAccount.isEmpty() || numberDestinationAccount.isEmpty()){
             return new ResponseEntity<>("Incomplete fields.", HttpStatus.FORBIDDEN);
@@ -62,7 +60,7 @@ public class TransactionController {
             return new ResponseEntity<>("The source account does not belong to the authenticated client.", HttpStatus.FORBIDDEN);
         }
 
-        Account destinationAccount = accountRepository.findByNumber(numberDestinationAccount);
+        Account destinationAccount = accountService.getAccountByNumber(numberDestinationAccount);
 
         if(destinationAccount == null){
             return new ResponseEntity<>("The recipient account does not exist.", HttpStatus.FORBIDDEN);
@@ -72,17 +70,17 @@ public class TransactionController {
             return new ResponseEntity<>("Insufficient funds.", HttpStatus.FORBIDDEN);
         }
 
-        Transaction transaction1 = new Transaction(TransactionType.DEBIT, amount, description + " -> " + destinationAccount.getNumber(), LocalDateTime.now(), rootAccount);
-        Transaction transaction2 = new Transaction(TransactionType.CREDIT, amount, description + " -> " + rootAccount.getNumber(), LocalDateTime.now(), destinationAccount);
+        Transaction transaction1 = transactionService.createTransaction(TransactionType.DEBIT, amount, description + " -> " + destinationAccount.getNumber(), LocalDateTime.now(), rootAccount);
+        Transaction transaction2 = transactionService.createTransaction(TransactionType.CREDIT, amount, description + " -> " + rootAccount.getNumber(), LocalDateTime.now(), destinationAccount);
 
-        transactionRepository.save(transaction1);
-        transactionRepository.save(transaction2);
+        transactionService.saveTransaction(transaction1);
+        transactionService.saveTransaction(transaction2);
 
         rootAccount.setBalance(rootAccount.getBalance() - amount);
         destinationAccount.setBalance(destinationAccount.getBalance() + amount);
 
-        accountRepository.save(rootAccount);
-        accountRepository.save(destinationAccount);
+        accountService.saveAccount(rootAccount);
+        accountService.saveAccount(destinationAccount);
 
         return new ResponseEntity<>("Everything has gone well!", HttpStatus.CREATED);
     }

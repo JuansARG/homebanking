@@ -13,9 +13,12 @@ public class ClientLoan {
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
 
-    private Double amount;
+    private Double requestAmount;
+    private Double finalAmount;
+    private Double restAmount;
+    private Double quotaValue;
     private Integer payments;
-
+    private Integer remainingPayments;
     private LocalDate applicationDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -30,24 +33,36 @@ public class ClientLoan {
 
     }
 
-    public ClientLoan(Double amount, Integer payments, Client client, Loan loan, LocalDate applicationDate) {
-        this.amount = amount;
+    public ClientLoan(Double amount, Double finalAmount, Integer payments, Client client, Loan loan, LocalDate applicationDate) {
+        this.requestAmount = amount;
+        this.finalAmount = finalAmount;
+        this.restAmount = finalAmount;
         this.payments = payments;
+        this.remainingPayments = payments;
         this.client = client;
         this.loan = loan;
         this.applicationDate = applicationDate;
+        this.quotaValue = finalAmount / payments;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Double getAmount() {
-        return amount;
+    public Double getFinalAmount() {
+        return finalAmount;
     }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
+    public void setFinalAmount(Double finalAmount) {
+        this.finalAmount = finalAmount;
+    }
+
+    public Double getQuotaValue() {
+        return quotaValue;
+    }
+
+    public void setQuotaValue(Double quotaValue) {
+        this.quotaValue = quotaValue;
     }
 
     public Integer getPayments() {
@@ -56,6 +71,14 @@ public class ClientLoan {
 
     public void setPayments(Integer payments) {
         this.payments = payments;
+    }
+
+    public Integer getRemainingPayments() {
+        return remainingPayments;
+    }
+
+    public void setRemainingPayments(Integer remainingPayments) {
+        this.remainingPayments = remainingPayments;
     }
 
     public Client getClient() {
@@ -80,5 +103,21 @@ public class ClientLoan {
 
     public void setApplicationDate(LocalDate applicationDate) {
         this.applicationDate = applicationDate;
+    }
+
+    public Double getRequestAmount() {
+        return requestAmount;
+    }
+
+    public void setRequestAmount(Double requestAmount) {
+        this.requestAmount = requestAmount;
+    }
+
+    public Double getRestAmount() {
+        return restAmount;
+    }
+
+    public void setRestAmount(Double restAmount) {
+        this.restAmount = restAmount;
     }
 }

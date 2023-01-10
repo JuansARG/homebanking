@@ -23,8 +23,8 @@ createApp({
         cargarDatos(){
 
             axios.get("http://localhost:8080/api/clients/current")
-                .then(respuesta => {
-                    this.json = respuesta;
+                .then(r => {
+                    this.json = r;
                     this.cliente = this.json.data;
                     this.cuentas = this.cliente.account;  
                 })
@@ -54,9 +54,9 @@ createApp({
                             text: "The transfer has been successful, the changes can already be seen reflected in the accounts section, it will be redirected there.",
                         }).then(() => {
                             axios.post("http://localhost:8080/api/transactions", 
-                                    `amount=${this.montoTransferencia}&description=${this.descripcion}&numberRootAccount=${this.cuentaOrigen}&numberDestinationAccount=${this.cuentaDestino}`
-                            ).then(() => location.href = "http://localhost:8080/web/accounts.html")
-                            .catch(e => console.log(e));
+                                `amount=${this.montoTransferencia}&description=${this.descripcion}&numberRootAccount=${this.cuentaOrigen}&numberDestinationAccount=${this.cuentaDestino}`
+                                ).then(() => location.href = "http://localhost:8080/web/accounts.html")
+                                .catch(e => console.log(e));
                         });    
                     }
                 }).catch(e => console.log(e));
@@ -77,11 +77,9 @@ createApp({
                     Swal.fire({
                         icon: "success",
                         text: "Will be redirected, see you soon.",
-                    }).then(r => {
+                    }).then(() => {
                         axios.post("http://localhost:8080/api/logout")
-                        .then(r => {
-                            location.href = "http://localhost:8080/web/login.html"
-                        })
+                        .then(() => location.href = "http://localhost:8080/web/login.html")
                         .catch(e => console.log(e));
                     })
                 }

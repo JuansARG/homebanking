@@ -6,8 +6,13 @@ createApp({
             email: "",
             cliente: {},
             cuentas: {},
-            idCuenta : undefined,
             prestamos: {},
+            idPrestamo: 0, 
+            cuenta: "",
+            limiteDeCuotas: 0,
+            cuotasParaPagar: 0,
+            valorDeCuota: 0,
+            pagoTotal: 0,
         }
     },
     created() {
@@ -23,6 +28,24 @@ createApp({
                 })
                 .catch(e => console.log(e));
         },
+
+        pagarCuotas(){
+            axios.put("http://localhost:8080/api/loans", `accountNumber=${this.cuenta}&idCurrentClientLoan=${this.idPrestamo}&dues=${this.cuotasParaPagar}&value=${this.valorDeCuota}`)
+                    .then((r) => {
+                        console.log(r);
+                        Swal.fire({
+                            icon: "success",
+                            text: "The page will reload to display the changes..",
+                        }).then(() => location.href = "http://localhost:8080/web/accounts.html")
+                        })
+                    .catch(e => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: e.response.data,
+                        })
+                    })
+    },
 
         logout(){
             Swal.fire({
@@ -64,6 +87,17 @@ createApp({
                     })
                 } 
             }).catch(e => console.log(e));
+        },
+
+        modificarValores(limiteDeCuotas, valorDeCuota, idPrestamo){
+            this.limiteDeCuotas = limiteDeCuotas;
+            this.valorDeCuota = valorDeCuota;
+            this.idPrestamo = idPrestamo;
         }
     },
+    computed:{
+        calcularTotal(){
+            this.pagoTotal = this.cuotasParaPagar * this.valorDeCuota;
+        }
+    }
 }).mount("#app");

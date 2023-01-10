@@ -23,12 +23,17 @@ public class WebAuthorization {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/rest/**").denyAll()
-                .antMatchers("/web/index.html", "/web/login.html", "/assets/**").permitAll()
+                .antMatchers("/web/login.html", "/assets/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
-                .antMatchers("/manager.html", "/h2-console").hasAuthority("ADMIN")
+                .antMatchers("/manager.html", "/h2-console", "/rest/**").hasAuthority("ADMIN")
                 .antMatchers("/web/**", "/api/clients/current").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/current/clients/cards", "/api/transactions", "/api/loans").hasAuthority("CLIENT");
+                .antMatchers(HttpMethod.GET, "/api/loans").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.PUT, "/api/loans").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.DELETE, "api/clients/current/accounts/**").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards", "/api/transactions", "/api/loans").hasAuthority("CLIENT")
+                .anyRequest().denyAll();
+
+        //ARREGLAR ESTO
 
         // turn off checking for CSRF tokens
         http.csrf().disable();
@@ -37,17 +42,17 @@ public class WebAuthorization {
         http.headers().frameOptions().disable();
 
         // if user is not authenticated, just send an authentication failure response
-        http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
+        http.exceptionHandling().authenticationEntryPoint((req, res, exception) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
+        //MIRAR METODOS DE LA RES
 
         // if login is successful, just clear the flags asking for authentication
         http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
-
 
         // if login fails, just send an authentication failure response
         http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
 
         // if logout is successful, just send a success response
-        http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
+        http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()).invalidateHttpSession(true).clearAuthentication(true);
 
         http.formLogin()
                 .usernameParameter("email")

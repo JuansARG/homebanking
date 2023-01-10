@@ -15,10 +15,10 @@ createApp({
     },
     methods: {
         cargarDatos(){
-            axios.get("http://localhost:8080/api/clients/current")
-                .then(respuesta => {
 
-                    this.json = respuesta;
+            axios.get("http://localhost:8080/api/clients/current")
+                .then(r => {
+                    this.json = r;
                     this.cliente = this.json.data;
                     this.tarjetas = this.cliente.cards;
                     this.tarjetasCredito = this.tarjetas.filter(tarjeta => tarjeta.type == "CREDIT");
@@ -41,10 +41,10 @@ createApp({
                     Swal.fire({
                         icon: "success",
                         text: "Will be redirected, see you soon.",
-                    }).then(r => {
+                    }).then(() => {
                         axios.post("http://localhost:8080/api/logout")
-                        .then(() => location.href = "http://localhost:8080/web/login.html")
-                        .catch(e => console.log(e));
+                            .then(() => location.href = "http://localhost:8080/web/login.html")
+                            .catch(e => console.log(e));
                     })
                 }
             }).catch(e => console.log(e));

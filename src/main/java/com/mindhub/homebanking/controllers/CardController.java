@@ -5,19 +5,16 @@ import com.mindhub.homebanking.models.Card;
 import com.mindhub.homebanking.models.CardColor;
 import com.mindhub.homebanking.models.CardType;
 import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.repositories.CardRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.services.CardService;
+import com.mindhub.homebanking.services.ClientService;
 import com.mindhub.homebanking.utils.RandomNum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,27 +22,27 @@ import java.util.stream.Collectors;
 public class CardController {
 
     @Autowired
-    private CardRepository cardRepository;
+    private CardService cardService;
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
 
     @RequestMapping("/cards")
     public List<CardDTO> getCards(){
-        return cardRepository.findAll().stream().map(card -> new CardDTO(card)).collect(Collectors.toList());
+        return cardService.cardsToCardsDTO(cardService.getAllCards());
     }
 
     @RequestMapping("/cards/{id}")
     public CardDTO getCard(@PathVariable Long id){
-        return cardRepository.findById(id).map(card -> new CardDTO(card)).orElse(null);
+        return cardService.cardToCardDTO(cardService.getCardById(id));
     }
 
     @RequestMapping(path = "/clients/current/cards", method = RequestMethod.POST)
     public ResponseEntity<Object> createCard( @RequestParam CardType type,
                                               @RequestParam CardColor color,
                                               Authentication auth){
-        Client currentClient = clientRepository.findByEmail(auth.getName());
-        Set<Card> cards = currentClient.getCards();
+        Client currentClient = clientService.getClientByEmail(auth.getName());
+        List<Card> cards = currentClient.getCards().stream().toList();
         List<Card> cardsTypeTarget = cards.stream().filter(card -> card.getType() == type).collect(Collectors.toList());
 
         if(cards.size() == 6){
@@ -54,8 +51,8 @@ public class CardController {
             if (cardsTypeTarget.size() == 3){
                 return new ResponseEntity<>("You already have 3 accounts of the requested type", HttpStatus.FORBIDDEN);
             }else{
-                Card newCard = new Card(currentClient, type, color, RandomNum.getRandonNumber4CardNum(), RandomNum.getRandomNum4CVV(), LocalDate.now());
-                cardRepository.save(newCard);
+                Card newCard = cardService.createCard(currentClient, type, color, RandomNum.getRandonNumber4CardNum(), RandomNum.getRandomNum4CVV(), LocalDate.now());
+                cardService.saveCard(newCard);
                 return new ResponseEntity<>(HttpStatus.CREATED);
             }
         }

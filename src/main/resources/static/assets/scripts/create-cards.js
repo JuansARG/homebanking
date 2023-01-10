@@ -15,25 +15,17 @@ createApp({
         this.cargarDatos();
     },
     methods: {
-
         cargarDatos() {
-
             axios.get("http://localhost:8080/api/clients/current")
-                .then(respuesta => {
-                    this.cliente = respuesta.data;
+                .then(r => {
+                    this.cliente = r.data;
                     this.tarjetas = this.cliente.cards;
                     this.tarjetasCredito = this.tarjetas.filter(tarjeta => tarjeta.type == "CREDIT");
                     this.tarjetasDebito = this.tarjetas.filter(tarjeta => tarjeta.type == "DEBIT");
-                    console.log(this.cliente)
-                    console.log(this.tarjetas)
-                    console.log(this.tarjetasCredito)
-                    console.log(this.tarjetasDebito)
                 })
                 .catch(e => console.log(e));
         },
-
         solicitarTarjeta() {
-
             if (this.typeCard.length == 0 || this.colorCard.length == 0) {
                 Swal.fire({
                     icon: 'error',
@@ -54,7 +46,6 @@ createApp({
                         this.confirmarCreacion();
                     }
                 }
-
                 if(this.typeCard == "CREDIT"){
                     let coloresCredito = this.tarjetasCredito.map(fn)
                     if(coloresCredito.includes(this.colorCard)){
@@ -67,12 +58,9 @@ createApp({
                         this.confirmarCreacion();
                     }
                 }
-
             }
         },
-
         confirmarCreacion(){
-
             Swal.fire({
                 title: 'Are you sure?',
                 text: "",
@@ -81,22 +69,19 @@ createApp({
                 confirmButtonText: 'Yes!'
             }).then(r => {
                 if (r.isConfirmed) {
-                    Swal.fire({
-                        icon: "success",
-                        text: "Your card has been requested.",
-                    }).then(() => {
-                        axios.post("http://localhost:8080/api/clients/current/cards", 
+                    axios.post("http://localhost:8080/api/clients/current/cards", 
                             `type=${this.typeCard}&color=${this.colorCard}`)
-                            .then(() => location.href = "http://localhost:8080/web/cards.html")
-                            .catch(e => console.log(e));
-                    })
+                        .then(() => {
+                            Swal.fire({
+                                icon: "success",
+                                text: "Your card has been requested.",
+                            }).then(() => location.href = "http://localhost:8080/web/cards.html")
+                            })
+                        .catch(e => console.log(e));
                 }
             }).catch(e => console.log(e));
-    
         },
-    
         logout() {
-    
             Swal.fire({
                 title: 'Are you sure?',
                 text: "",
@@ -115,10 +100,8 @@ createApp({
                     })
                 }
             }).catch(e => console.log(e));
-    
         }
     },
     computed: {
-
     }
 }).mount("#app");
