@@ -20,12 +20,17 @@ public class AccountServiceImpl implements AccountService {
     AccountRepository accountRepository;
     @Override
     public List<Account> getAllAccounts() {
-        return accountRepository.findAll();
+        return accountRepository.findAll().stream().filter(Account::isEnable).toList();
     }
 
     @Override
     public Account getAccountById(Long id) {
-            return accountRepository.findById(id).orElse(null);
+        Account account = accountRepository.findById(id).orElse(null);
+        if (account != null && account.isEnable()) {
+            return account;
+        }else{
+            return null;
+        }
     }
 
     @Override
@@ -50,11 +55,20 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account getAccountByNumber(String number) {
-        return accountRepository.findByNumber(number);
+        if(accountRepository.findByNumber(number).isEnable()){
+            return accountRepository.findByNumber(number);
+        }else {
+            return null;
+        }
     }
 
     @Override
     public void deleteAccountById(Long id) {
-        accountRepository.deleteById(id);
+        Account account = accountRepository.findById(id).orElse(null);
+        if(account != null){
+            account.setEnable(false);
+            accountRepository.save(account);
+        }
     }
+
 }

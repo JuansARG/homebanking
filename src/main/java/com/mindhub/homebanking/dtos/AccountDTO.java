@@ -19,7 +19,7 @@ public class AccountDTO {
          number = account.getNumber();
          creationDate = account.getCreationDate();
          balance = account.getBalance();
-         transactions = account.getTransactions().stream().map(transaction -> new TransactionDTO(transaction)).collect(Collectors.toList());
+         transactions = account.getTransactions().stream().map(TransactionDTO::new).collect(Collectors.toList());
     }
 
     public Long getId() {

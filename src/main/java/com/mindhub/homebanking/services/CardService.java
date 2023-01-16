@@ -23,4 +23,6 @@ public interface CardService {
 
     void saveCard(Card card);
 
+    void deleteCardById(Long id);
+
 }

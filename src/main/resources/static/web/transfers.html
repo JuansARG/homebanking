@@ -146,7 +146,7 @@
                             <select class="form-select" v-model="cuentaOrigen">
                                 <option value="" disabled >Select account</option>
                                 <template v-for="cuenta in cuentas">
-                                    <option :value="cuenta.number">{{cuenta.number}}</option>
+                                    <option :value="cuenta.number">{{cuenta.number}} - Balance: ${{cuenta.balance}}</option>
                                 </template>
                             </select>
                             <p class="m-0">Step 3: Select destination account.</p>
@@ -154,7 +154,7 @@
                                 <option value="" disabled >Select account</option>
                                 {{mostrarCuentasRestantes}}
                                 <template v-for="cuenta in cuentasRestantes">
-                                    <option :value="cuenta.number">{{cuenta.number}}</option>
+                                    <option :value="cuenta.number">{{cuenta.number}} - Balance: ${{cuenta.balance}}</option>
                                 </template>
                             </select>
                             <p class="m-0">Step 4: Select amount to transaction.</p>
@@ -178,7 +178,7 @@
                                 <option value="" disabled >Select account</option>
                                 
                                 <template v-for="cuenta in cuentas">
-                                    <option :value="cuenta.number">{{cuenta.number}}</option>
+                                    <option :value="cuenta.number">{{cuenta.number}} - Balance: ${{cuenta.balance}}</option>
                                 </template>
                             
                             </select>

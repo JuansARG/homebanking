@@ -48,4 +48,9 @@ public class CardServiceImpl implements CardService {
     public void saveCard(Card card) {
         cardRepository.save(card);
     }
+
+    @Override
+    public void deleteCardById(Long id) {
+        cardRepository.deleteById(id);
+    }
 }

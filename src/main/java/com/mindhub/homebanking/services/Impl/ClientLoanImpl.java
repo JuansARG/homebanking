@@ -32,6 +32,10 @@ public class ClientLoanImpl implements ClientLoanService {
 
     @Override
     public void deleteClientLoanById(Long id) {
-        clientLoanRepository.deleteById(id);
+        ClientLoan clientLoan = clientLoanRepository.findById(id).orElse(null);
+        if(clientLoan != null){
+            clientLoan.setEnable(false);
+            clientLoanRepository.save(clientLoan);
+        }
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -43,7 +44,7 @@ public class AccountController {
             return new ResponseEntity<>("The client is not authenticated..", HttpStatus.FORBIDDEN);
         }
 
-        if (currentClient.getAccounts().size() == 3){
+        if (currentClient.getAccounts().stream().filter(Account::isEnable).toList().size() == 3){
             return new ResponseEntity<>("This customer already has 3 accounts", HttpStatus.FORBIDDEN);
         }
 
@@ -53,12 +54,11 @@ public class AccountController {
     }
 
 
-    //ARREGLAR ESTO QUE NO FUNCIONA...
-    @DeleteMapping(path = "/clients/current/accounts/{id}")
+    @RequestMapping(path = "/clients/current/accounts/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteAccount(@PathVariable Long id,
                                                 Authentication auth){
         Client currentClient = clientService.getClientByEmail(auth.getName());
-        Account currentAccount = (Account) currentClient.getAccounts().stream().filter(account -> account.getId().equals(id));
+        Account currentAccount = accountService.getAccountById(id);
 
         if(currentClient == null){
             return new ResponseEntity<>("The client is not authenticated..", HttpStatus.FORBIDDEN);
@@ -69,15 +69,17 @@ public class AccountController {
         }
 
         if(currentAccount.getBalance() > 0){
-            return new ResponseEntity<>("You cannot delete an account that has a balance.", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("You cannot delete an account that has a balance.", HttpStatus.CONFLICT);
         }
 
         if(currentClient.getAccounts().stream().noneMatch(account -> account.getId().equals(id))){
             return new ResponseEntity<>("The account you want to delete does not belong to the authenticated client.", HttpStatus.FORBIDDEN);
         }
 
+        //currentAccount.setEnable(false);
+        //accountService.saveAccount(currentAccount);
         accountService.deleteAccountById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("The account has been deleted.", HttpStatus.OK);
     }
 
 }

@@ -137,7 +137,7 @@
                 <h4 class="mt-3 fw-bold">{{cliente.lastName + " " + cliente.firstName}}</h4>
                 <h4 class="m-0 fw-bold text-center">Request loan</h4>
             </div>
-
+            {{calcularCuotasMontoMaxMontoMin}}
             <form class="d-flex flex-column gap-4 my-2 animate__animated animate__fadeIn">
                 <div class="d-flex flex-column gap-3">
                     <p class="m-0">Step 1: Select loan type.</p>
@@ -148,27 +148,27 @@
                         </template>
                     </select>
                     <p class="m-0">Step 2: Enter an amount..</p>
-                    <template v-if="nombrePrestamoSeleccionado != `` ">
+                    <template v-if="nombrePrestamoSeleccionado != ``">
                         <p class="m-0">Max amount: {{montoMaximo}}</p>
+                        <p class="m-0">Min amount: {{montoMinimo}}</p>
                     </template>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-default">$ </span>
                         
                         <input type="number" class="form-control" :placeholder="montoSolicitado" v-model="montoSolicitado">                    
                     </div>
-                    {{mostrarCuotas}}
                     <p class="m-0">Step 3: Select a number of installments.</p>
                     <select class="form-select" v-model="cuotasSeleccionadas">
                         <option value="" disabled>Quotas available</option>
                         <template v-for="cuotas of cuotasDisponibles">
-                            <option :value="cuotas">{{cuotas}}</option>
+                            <option :value="cuotas">{{cuotas}} * {{((montoSolicitado * 1.2) / cuotas).toFixed()}}</option>
                         </template>
                     </select>
                     <p class="m-0">Step 4: Select the account where you want to deposit the requested amount.</p>
                     <select class="form-select" v-model="numeroDeCuentaSeleccionada">
                         <option value="" disabled>Select one of your accounts.</option>
                         <template v-for="cuenta of cuentas">
-                            <option :value="cuenta.number">{{cuenta.number}}</option>
+                            <option :value="cuenta.number">{{cuenta.number}} - Balance: ${{cuenta.balance}}</option>
                         </template>
                     </select>
                     <p class="m-0">Step 5: Apply for loan.</p>

@@ -20,6 +20,7 @@ public class ClientLoan {
     private Integer payments;
     private Integer remainingPayments;
     private LocalDate applicationDate;
+    private boolean enable = true;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
@@ -119,5 +120,13 @@ public class ClientLoan {
 
     public void setRestAmount(Double restAmount) {
         this.restAmount = restAmount;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 }

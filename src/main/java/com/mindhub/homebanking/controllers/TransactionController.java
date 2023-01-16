@@ -43,9 +43,22 @@ public class TransactionController {
         Client currentClient = clientService.getClientByEmail(auth.getName());
         Account rootAccount = accountService.getAccountByNumber(numberRootAccount);
 
-        if(amount == 0 || description.isEmpty() || numberRootAccount.isEmpty() || numberDestinationAccount.isEmpty()){
-            return new ResponseEntity<>("Incomplete fields.", HttpStatus.FORBIDDEN);
+        if(amount == 0 || amount < 500){
+            return new ResponseEntity<>("Invalid amount, the minimum amount is 500.", HttpStatus.FORBIDDEN);
         }
+
+        if(description.isEmpty()){
+            return new ResponseEntity<>("The description is required.", HttpStatus.FORBIDDEN);
+        }
+
+        if(numberRootAccount.isEmpty()){
+            return new ResponseEntity<>("The source account number is invalid.", HttpStatus.FORBIDDEN);
+        }
+
+        if(numberDestinationAccount.isEmpty()){
+            return new ResponseEntity<>("The destination account number is invalid.", HttpStatus.FORBIDDEN);
+        }
+
 
         if(numberRootAccount.equalsIgnoreCase(numberDestinationAccount)){
             return new ResponseEntity<>("The source account and the destination account are the same.", HttpStatus.FORBIDDEN);

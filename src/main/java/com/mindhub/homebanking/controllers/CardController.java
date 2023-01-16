@@ -43,7 +43,7 @@ public class CardController {
                                               Authentication auth){
         Client currentClient = clientService.getClientByEmail(auth.getName());
         List<Card> cards = currentClient.getCards().stream().toList();
-        List<Card> cardsTypeTarget = cards.stream().filter(card -> card.getType() == type).collect(Collectors.toList());
+        List<Card> cardsTypeTarget = cards.stream().filter(card -> card.getType() == type).toList();
 
         if(cards.size() == 6){
             return new ResponseEntity<>("The limit is 6 cards." ,HttpStatus.FORBIDDEN);
@@ -58,4 +58,25 @@ public class CardController {
         }
     }
 
+    @DeleteMapping(path = "/clients/current/cards/{id}")
+    public ResponseEntity<Object> deleteCard(@PathVariable Long id,
+                                             Authentication auth){
+        Client currentClient = clientService.getClientByEmail(auth.getName());
+        Card currentCard = cardService.getCardById(id);
+
+        if(currentClient == null){
+            return new ResponseEntity<>("The client is not authenticated..", HttpStatus.FORBIDDEN);
+        }
+
+        if(currentCard == null){
+            return new ResponseEntity<>("The card does not exist.", HttpStatus.FORBIDDEN);
+        }
+
+        if(currentClient.getCards().stream().noneMatch(card -> card.getId().equals(id))){
+            return new ResponseEntity<>("The card you want to delete does not belong to the authenticated client.", HttpStatus.FORBIDDEN);
+        }
+
+        cardService.deleteCardById(id);
+        return new ResponseEntity<>("The card has been deleted.", HttpStatus.OK);
+    }
 }

@@ -76,13 +76,14 @@ public class LoanController {
 
         //VERIFICAR SI EL CURRENT CLIENT YA POSEE UN PRESTAMO DEL TIPO SOLICITADO
         List<ClientLoan> listClientLoan = currentClient.getLoans().stream().toList();
-        if(listClientLoan.stream().anyMatch(clientLoan -> clientLoan.getLoan().equals(currentLoan))){
+        //listClientLoan.stream().anyMatch(clientLoan -> clientLoan.getLoan().equals(currentLoan))
+        if(listClientLoan.stream().filter(ClientLoan::isEnable).anyMatch(clientLoan -> clientLoan.getLoan().equals(currentLoan))){
             return new ResponseEntity<>("You already have a loan with the type requested.", HttpStatus.FORBIDDEN);
         }
 
         double finalAmount = loanApplicationDTO.getAmount() + (loanApplicationDTO.getAmount() * 0.20);
 
-        Transaction transaction = transactionService.createTransaction(TransactionType.CREDIT, finalAmount, currentLoan.getName() + " Loan Approved", LocalDateTime.now(), destinationAccount);
+        Transaction transaction = transactionService.createTransaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), currentLoan.getName() + " Loan Approved", LocalDateTime.now(), destinationAccount);
         transactionService.saveTransaction(transaction);
 
         destinationAccount.setBalance(destinationAccount.getBalance() + loanApplicationDTO.getAmount());
@@ -156,8 +157,6 @@ public class LoanController {
 
         String transactionDescription = "Advance of " + dues + " installments of " + typeOfLoan.getName();
 
-
-
         Transaction transaction = transactionService.createTransaction(TransactionType.DEBIT, amount, transactionDescription, LocalDateTime.now(), currentAccount);
         transactionService.saveTransaction(transaction);
 
@@ -165,6 +164,8 @@ public class LoanController {
         accountService.saveAccount(currentAccount);
 
         if(currentClientLoan.getRemainingPayments() - dues == 0){
+            currentClientLoan.setRemainingPayments(currentClientLoan.getRemainingPayments() - dues);
+            currentClientLoan.setRestAmount(currentClientLoan.getRestAmount() - amount);
             clientLoanService.deleteClientLoanById(idCurrentClientLoan);
         }else {
             currentClientLoan.setRemainingPayments(currentClientLoan.getRemainingPayments() - dues);
