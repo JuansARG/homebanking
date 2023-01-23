@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/img/favi-bank3.png" type="image/x-icon">
+
+    <!--bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <!--animacionesTitulos-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!--css-->
+    <link rel="stylesheet" href="assets/styles/manager.css">
+
+    <title>Manager</title>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <header class="d-flex flex-column justify-content-center align-items-center animate__animated animate__fadeInUp">
+            <div class="w-100 d-flex flex-column align-items-center gap-3 py-4 px-2" id="divHeader">
+                <img src="/assets/img/lechuza.png" alt="logo" style="width: 170px; height: 150px;">
+                <h1 class="text-center text-light p-0 m-0 fw-bold" 
+                    style="font-size: 4rem;"
+                    id="titulo">
+                    Old owl Bank's
+                </h1>
+            </div>
+            
+
+            <nav class="navbar navbar-expand-lg w-100 p-0">
+                <div class="container-fluid d-flex align-items-center p-3">
+
+
+                    <div class="w-100 d-flex align-items-center">
+                        <span class="d-flex gap-3 align-items-end">
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                width="50" height="50" 
+                                fill="currentColor" 
+                                class="bi bi-person-circle" 
+                                viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                            </svg>
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                width="50" height="50" 
+                                fill="currentColor" 
+                                class="bi bi-gear" 
+                                viewBox="0 0 16 16">
+                                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                            </svg>
+                        </span>
+                        <button 
+                            class="navbar-toggler ms-auto" 
+                            type="button" 
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarTogglerDemo03" 
+                            aria-controls="navbarTogglerDemo03" 
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarTogglerDemo03">
+                        <ul class="navbar-nav my-2 mb-lg-0 d-flex gap-2">
+                            <li class="nav-item">
+                                <a 
+                                    class="nav-link active" 
+                                    aria-current="page" 
+                                    href="#"
+                                    style="padding: .5rem; font-size: .8rem;">
+                                    Manager
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a 
+                                    class="nav-link" 
+                                    aria-current="page" 
+                                    href="./home.html"
+                                    style="padding: .5rem; font-size: .8rem;">
+                                    Home
+                                </a>
+                            </li>
+                            <!--
+                            <li class="nav-item">
+                                <a 
+                                    class="nav-link d-flex gap-1 align-items-center disabled text-nowrap"
+                                    style="padding: .5rem; font-size: .8rem;">
+                                    Accounts
+                                    <svg 
+                                        xmlns="http://www.w3.org/2000/svg" 
+                                        width="22" height="22" 
+                                        fill="currentColor" 
+                                        class="bi bi-lock text-dark" 
+                                        viewBox="0 0 16 16">
+                                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a 
+                                    class="nav-link d-flex gap-1 align-items-center disabled"
+                                    style="padding: .5rem; font-size: .8rem;">
+                                    Transactions
+                                    <svg 
+                                        xmlns="http://www.w3.org/2000/svg" 
+                                        width="22" height="22" 
+                                        fill="currentColor" 
+                                        class="bi bi-lock text-dark" 
+                                        viewBox="0 0 16 16">
+                                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            -->
+                        </ul>
+                    </div>
+                    
+                </div>
+            </nav>
+
+        </header>
+
+        <main class="d-flex flex-column align-items-center p-3" id="main">
+
+            <div class="d-flex flex-column gap-3 col-12 col-xxl-10">
+                <div class=" animate__animated animate__fadeIn">
+                    <h2 class="text-center p-2 px-3 m-0 rounded rounded-pill d-flex align-items-center justify-content-center gap-2" style="color: #FFC23C; background-color: #100720; border: 2px solid #FFC23C;">
+                        Administration Panel
+                    </h2>
+                </div>
+    
+                <div class="animate__animated animate__fadeIn">
+                    <p class="text-center p-2 m-0 rounded" style="color: #FFC23C; background-color: #666; border: 2px solid #FFC23C;">
+                        Welcome, in order to navigate, you must first enter one of the customer 
+                        accounts that the table shows through one of its icons. On the other hand, 
+                        you can also modify and delete clients with the remaining icons.
+                    </p>
+                </div>
+            </div>
+
+            
+
+            <div class="col-12 d-flex flex-column justify-content-center gap-3 py-3" id="contenedorMain">
+                <div class="col-12 col-lg-6 col-xxl-5 mb-3">
+                    <div class="d-flex flex-column gap-2 mb-3">
+                        <h2 class="text-center p-2 m-0 fw-bold rounded-pill rounded-start subtitulos animate__animated animate__pulse">
+                            Client List
+                        </h2>
+                        <div class="table-responsive rounded animate__animated animate__fadeIn">
+                            <table class="table table-light table-striped table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+    
+                                    <template v-for="cliente in clientes">
+                                        <tr>
+                                            <td>{{cliente.id}}</td>
+                                            <td>{{cliente.firstName}}</td>
+                                            <td>{{cliente.lastName}}</td>
+                                            <td class="text-nowrap">{{cliente.email}}</td>
+                                            <td class="d-flex gap-4">
+                                                <a :href="'http://localhost:8080/web/accounts.html?id=' + cliente.id">
+                                                    <svg 
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="24" height="24" fill="currentColor"
+                                                        class="bi bi-credit-card-2-front-fill text-dark acciones" 
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+                                                    </svg>
+                                                </a>
+                                                <span data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                    @click="modificarCliente(cliente)" class="acciones">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                                    width="24" height="24"
+                                                    fill="currentColor" 
+                                                    class="bi bi-pen-fill" 
+                                                    viewBox="0 0 16 16">
+                                                        <path
+                                                            d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z" />
+                                                    </svg>
+                                                </span>
+                                                <span @click="borrarCliente(cliente)" class="acciones">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                                        width="24" height="24"
+                                                        fill="currentColor" 
+                                                        class="bi bi-trash3-fill" 
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                    </svg>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </template>
+    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+    
+                    <div class="d-flex flex-column gap-2">
+                        <h2 class="text-center p-2 m-0 fw-bold rounded-pill rounded-start subtitulos animate__animated animate__pulse">
+                            Client Manager
+                        </h2>
+                        <form class="d-flex flex-column gap-2 bg-light p-4 pb-3 rounded animate__animated animate__fadeIn"
+                            @submit.prevent="agregarCliente()">
+                            <div class="form-floating mb-3 shadow-lg">
+                                <input type="text" class="form-control" id="firstName" placeholder="First Name..."
+                                    v-model="nombre" required>
+                                <label for="firstName">First Name:</label>
+                            </div>
+                            <div class="form-floating mb-3 shadow-lg">
+                                <input type="text" class="form-control" id="lastName" placeholder="Last Name..."
+                                    v-model="apellido" required>
+                                <label for="lastName">Last Name:</label>
+                            </div>
+                            <div class="form-floating mb-3 shadow-lg">
+                                <input type="email" class="form-control" id="email" placeholder="Email..." v-model="email"
+                                    required>
+                                <label for="email">Email:</label>
+                            </div>
+                            <button type="submit" class="btn border border-2 border-dark col-12 col-lg-5 ms-auto fw-bold"
+                                style="background-color: #FFC23C;" id="botonAddClient">
+                                <span class="d-flex justify-content-center align-items-center gap-2">
+                                    <p class="m-0 text-nowrap">Add client</p>
+                                    <svg 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                        width="24" height="24" 
+                                        fill="currentColor"
+                                        class="bi bi-database-fill-add" 
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0ZM8 1c-1.573 0-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4s.875 1.755 1.904 2.223C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777C13.125 5.755 14 5.007 14 4s-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1Z" />
+                                        <path
+                                            d="M2 7v-.839c.457.432 1.004.751 1.49.972C4.722 7.693 6.318 8 8 8s3.278-.307 4.51-.867c.486-.22 1.033-.54 1.49-.972V7c0 .424-.155.802-.411 1.133a4.51 4.51 0 0 0-4.815 1.843A12.31 12.31 0 0 1 8 10c-1.573 0-3.022-.289-4.096-.777C2.875 8.755 2 8.007 2 7Zm6.257 3.998L8 11c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13h.027a4.552 4.552 0 0 1 .23-2.002Zm-.002 3L8 14c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.507 4.507 0 0 1-1.3-1.905Z" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+    
+                <div class="col-12 col-lg-6 col-xxl-5 d-flex flex-column gap-2" id="contenedorREST">
+                    <h2 class="text-center p-2 m-0 fw-bold rounded-pill rounded-end subtitulos animate__animated animate__pulse">
+                        Client REST response
+                    </h2>
+                    <pre class="text-light fw-bold m-0 p-1 rounded animate__animated animate__fadeIn">
+                        {{data}}
+                    </pre>
+                </div>
+            </div>
+
+            <!--modal-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title fs-2 text-center w-100" id="exampleModalLabel">Modify client</h2>
+                        </div>
+                        <div class="modal-body d-flex flex-column gap-2 align-items-center">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="firstName" placeholder="First Name..."
+                                    v-model="nombreReactivo" required>
+                                <label for="firstName">First Name:</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="lastName" placeholder="Last Name..."
+                                    v-model="apellidoReactivo" required>
+                                <label for="lastName">Last Name:</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="email" placeholder="Email..."
+                                    v-model="emailReactivo" required>
+                                <label for="email">Email:</label>
+                            </div>
+                            <div class="modal-footer pb-0 w-100">
+                                <button type="button" class="btn col-4 border border-2 fw-bold"
+                                    style="background-color: #100720; color: #FFC23C; border-color: #FFC23C!important;"
+                                    data-bs-dismiss="modal">Close
+                                </button>
+                                <button type="button" class="btn col-4 border border-2 fw-bold"
+                                    style="background-color: #FFC23C; border-color: #100720!important;"
+                                    data-bs-dismiss="modal" @click="confirmarModificacion()">Save changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="mt-auto flex flex-column">
+            <div class="d-flex d-flex p-2 py-4 gap-3 justify-content-center" id="contenedorFooter">
+                <div class="d-flex flex-column text-center">
+                    <p class="m-0 py-2" style="border-bottom: 1px solid black; border-top: 1px solid black;">Legal Warning</p>
+                    <p class="m-0 py-2" style="border-bottom: 1px solid black;">Privacy Policy</p>
+                    <p class="m-0 py-2" style="border-bottom: 1px solid black; ">Cookies Policy</p>
+                    <p class="m-0 py-2" style="border-bottom: 1px solid black;">Quality Policy</p>
+                </div>
+                <div class="d-flex flex-column gap-1 justify-content-around text-center">
+                    <span>
+                        <img src="/assets/img/lechuza.png" alt="logo" style="width: 80px; height: 80px;">
+                    </span>
+                    <p class="m-0 fw-bold">Old Owl Bank's</p>
+                    <span class="d-flex justify-content-around">
+                        <a href="https://www.facebook.com/JuaanSarmiento/" class="text-dark">
+                            <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            width="24" height="24" 
+                            fill="currentColor" 
+                            class="bi bi-facebook" 
+                            viewBox="0 0 16 16">
+                            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                        </svg>
+                        </a>
+                        <a href="https://web.whatsapp.com" class="text-dark">
+                            <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            width="24" height="24" 
+                            fill="currentColor" 
+                            class="bi bi-whatsapp" 
+                            viewBox="0 0 16 16">
+                            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                        </svg>
+                        </a>
+                        <a href="https://www.instagram.com/juansarmiento96/" class="text-dark">
+                            <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            width="24" height="24" 
+                            fill="currentColor" 
+                            class="bi bi-instagram" 
+                            viewBox="0 0 16 16">
+                            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                        </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/juanisat/" class="text-dark">
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                width="24" height="24" 
+                                fill="currentColor" 
+                                class="bi bi-linkedin" 
+                                viewBox="0 0 16 16">
+                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                            </svg>
+                        </a>
+                    </span>
+                </div>
+                <div class="d-flex flex-column text-center">
+                    <p class="m-0 py-2" style="border-top: 1px solid black; border-bottom: 1px solid black;">Mindhub</p>
+                    <p class="m-0 py-2" style="border-bottom: 1px solid black;">Cohorts 37/38</p>
+                    <p class="m-0 py-2" style="border-bottom: 1px solid black;">2022</p>
+                    <p class="m-0 py-2" style="border-bottom: 1px solid black;">December</p>
+                </div>
+            </div>
+            <div class="bg-dark py-3 text-center text-light">
+                <p>developed by :</p>
+                <h3 class="m-0">Juan I. Sarmiento</h3>
+            </div>
+        </footer>
+
+    </div>
+
+    <!--bootstrapJS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+
+    <!--sweetalert-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!--VueJs-->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!--axios-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!--managerJS-->
+    <script src="assets/scripts/manager.js"></script>
+
+</body>
+
+</html>

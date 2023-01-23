@@ -20,7 +20,7 @@ public class ClientLoan {
     private Integer payments;
     private Integer remainingPayments;
     private LocalDate applicationDate;
-    private boolean enable = true;
+    private boolean enable;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
@@ -34,7 +34,7 @@ public class ClientLoan {
 
     }
 
-    public ClientLoan(Double amount, Double finalAmount, Integer payments, Client client, Loan loan, LocalDate applicationDate) {
+    public ClientLoan(Double amount, Double finalAmount, Integer payments, Client client, Loan loan, LocalDate applicationDate, double quotaValue, boolean enableValue) {
         this.requestAmount = amount;
         this.finalAmount = finalAmount;
         this.restAmount = finalAmount;
@@ -43,7 +43,8 @@ public class ClientLoan {
         this.client = client;
         this.loan = loan;
         this.applicationDate = applicationDate;
-        this.quotaValue = finalAmount / payments;
+        this.quotaValue = quotaValue;
+        this.enable = enableValue;
     }
 
     public Long getId() {

@@ -22,6 +22,9 @@ public class Card {
     private Integer cvv;
     private LocalDate thruDate;
     private LocalDate fromDate;
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
@@ -31,16 +34,19 @@ public class Card {
 
     }
 
-    public Card(Client client, CardType type, CardColor color, String number, Integer cvv, LocalDate thruDate){
-        cardHolder = client.getLastName() + " " + client.getFirstName();
+    public Card(String cardHolder, CardType type, CardColor color, String number, Integer cvv, LocalDate thruDate, LocalDate fromDate, Client client, Account account){
+        this.cardHolder = cardHolder;
         this.type = type;
         this.color = color;
         this.number = number;
         this.cvv = cvv;
         this.thruDate = thruDate;
-        this.fromDate = thruDate.plusYears(5);
+        this.fromDate = fromDate;
         this.client = client;
+        this.account = account;
     }
+
+
 
     public Long getId() {
         return id;
@@ -108,5 +114,13 @@ public class Card {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Account getAccount() {
+        return account;
     }
 }

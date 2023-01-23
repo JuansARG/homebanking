@@ -2,6 +2,7 @@ package com.mindhub.homebanking.services;
 
 import com.mindhub.homebanking.dtos.AccountDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
 
 import java.time.LocalDate;
@@ -19,7 +20,7 @@ public interface AccountService {
 
     void saveAccount(Account account);
 
-    Account createAccount(String number, double balance, LocalDate creationDate, Client owner);
+    Account createAccount(String number, double balance, LocalDate creationDate, Client owner, boolean EnableValue, AccountType type);
 
     Account getAccountByNumber(String number);
 

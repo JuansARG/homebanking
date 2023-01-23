@@ -1,10 +1,7 @@
 package com.mindhub.homebanking.services.Impl;
 
 import com.mindhub.homebanking.dtos.CardDTO;
-import com.mindhub.homebanking.models.Card;
-import com.mindhub.homebanking.models.CardColor;
-import com.mindhub.homebanking.models.CardType;
-import com.mindhub.homebanking.models.Client;
+import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.CardRepository;
 import com.mindhub.homebanking.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +37,8 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public Card createCard(Client client, CardType type, CardColor color, String number, Integer cvv, LocalDate thruDate) {
-        return new Card(client, type, color, number, cvv, thruDate);
+    public Card createCard(String cardHolder, CardType type, CardColor color, String number, Integer cvv, LocalDate thruDate, LocalDate fromDate, Client client, Account account) {
+        return new Card(cardHolder, type, color, number, cvv, thruDate, fromDate, client, account);
     }
 
     @Override
@@ -52,5 +49,10 @@ public class CardServiceImpl implements CardService {
     @Override
     public void deleteCardById(Long id) {
         cardRepository.deleteById(id);
+    }
+
+    @Override
+    public Card getCardByNumber(String number) {
+        return cardRepository.findByNumber(number);
     }
 }

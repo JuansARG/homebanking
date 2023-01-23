@@ -30,4 +30,15 @@ public class LoanServiceImpl implements LoanService {
         return loanRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public Loan getLoanByName(String name) {
+        return loanRepository.findByName(name);
+    }
+
+    @Override
+    public void saveLoan(Loan loan) {
+        loanRepository.save(loan);
+    }
+
+
 }

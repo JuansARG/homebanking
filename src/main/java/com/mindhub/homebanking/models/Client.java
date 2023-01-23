@@ -59,6 +59,8 @@ public class Client {
     public Set<ClientLoan> getLoans() {
         return clientLoans;
     }
+
+
     public Long getId() {
         return id;
     }

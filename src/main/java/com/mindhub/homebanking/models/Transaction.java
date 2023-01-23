@@ -15,8 +15,11 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     private TransactionType type;
     private double amount;
+    private double updateBalance;
     private String description;
     private LocalDateTime date;
+
+    private boolean enable;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
@@ -25,12 +28,14 @@ public class Transaction {
     public Transaction(){
 
     }
-    public Transaction(TransactionType type, double amount, String description, LocalDateTime date, Account account) {
+    public Transaction(TransactionType type, double amount, String description, LocalDateTime date, Account account, double updateBalance, boolean enable) {
         this.type = type;
         this.amount = amount;
         this.description = description;
         this.date = date;
         this.account = account;
+        this.updateBalance = updateBalance;
+        this.enable = enable;
     }
 
 
@@ -77,5 +82,21 @@ public class Transaction {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public double getUpdateBalance() {
+        return updateBalance;
+    }
+
+    public void setUpdateBalance(double updateBalance) {
+        this.updateBalance = updateBalance;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
@@ -76,21 +77,29 @@ public class LoanController {
 
         //VERIFICAR SI EL CURRENT CLIENT YA POSEE UN PRESTAMO DEL TIPO SOLICITADO
         List<ClientLoan> listClientLoan = currentClient.getLoans().stream().toList();
-        //listClientLoan.stream().anyMatch(clientLoan -> clientLoan.getLoan().equals(currentLoan))
         if(listClientLoan.stream().filter(ClientLoan::isEnable).anyMatch(clientLoan -> clientLoan.getLoan().equals(currentLoan))){
             return new ResponseEntity<>("You already have a loan with the type requested.", HttpStatus.FORBIDDEN);
         }
 
-        double finalAmount = loanApplicationDTO.getAmount() + (loanApplicationDTO.getAmount() * 0.20);
+        double finalAmount = loanApplicationDTO.getAmount() + (loanApplicationDTO.getAmount() * (currentLoan.getInterestRate()) / 100);
 
-        Transaction transaction = transactionService.createTransaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), currentLoan.getName() + " Loan Approved", LocalDateTime.now(), destinationAccount);
+        Transaction transaction = transactionService.createTransaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), currentLoan.getName() + " Loan Approved", LocalDateTime.now(), destinationAccount, destinationAccount.getBalance() + loanApplicationDTO.getAmount(), true);
         transactionService.saveTransaction(transaction);
 
         destinationAccount.setBalance(destinationAccount.getBalance() + loanApplicationDTO.getAmount());
         accountService.saveAccount(destinationAccount);
 
 
-        ClientLoan clientLoan = clientLoanService.createClientLoan(loanApplicationDTO.getAmount(), finalAmount, loanApplicationDTO.getPayments(), currentClient, currentLoan, LocalDate.now());
+        ClientLoan clientLoan = clientLoanService.createClientLoan(
+                                                                    loanApplicationDTO.getAmount(),
+                                                                    finalAmount,
+                                                                    loanApplicationDTO.getPayments(),
+                                                                    currentClient,
+                                                                    currentLoan,
+                                                                    LocalDate.now(),
+                                                                    finalAmount / loanApplicationDTO.getPayments(),
+                                                                    true
+                                                                    );
         clientLoanService.saveClientLoan(clientLoan);
 
         return new ResponseEntity<>("Everything has gone well!", HttpStatus.CREATED);
@@ -157,7 +166,7 @@ public class LoanController {
 
         String transactionDescription = "Advance of " + dues + " installments of " + typeOfLoan.getName();
 
-        Transaction transaction = transactionService.createTransaction(TransactionType.DEBIT, amount, transactionDescription, LocalDateTime.now(), currentAccount);
+        Transaction transaction = transactionService.createTransaction(TransactionType.DEBIT, amount, transactionDescription, LocalDateTime.now(), currentAccount, currentAccount.getBalance() - amount, true);
         transactionService.saveTransaction(transaction);
 
         currentAccount.setBalance(currentAccount.getBalance() - amount);
@@ -174,5 +183,22 @@ public class LoanController {
         }
 
         return new ResponseEntity<>("Everything has gone well.", HttpStatus.OK);
+    }
+
+    @PostMapping("/create/loan")
+    public ResponseEntity<Object> createLoanByAdmin(@RequestParam double maxAmount,
+                                                    @RequestParam List<Integer> payments,
+                                                    @RequestParam String nameLoanBased,
+                                                    Authentication auth){
+        Loan currentLoan = loanService.getLoanByName(nameLoanBased);
+        List<String> authorities = auth.getAuthorities().stream().map(Object::toString).toList();
+
+        if(!authorities.contains("ADMIN")){
+            return new ResponseEntity<>("You do not possess the necessary authority.", HttpStatus.FORBIDDEN);
+        }
+
+        Loan newLoan = new Loan(currentLoan.getName(), maxAmount, payments, currentLoan.getInterestRate());
+        loanService.saveLoan(newLoan);
+        return new ResponseEntity<>("New Loan Created: " + newLoan.toString(), HttpStatus.CREATED);
     }
 }

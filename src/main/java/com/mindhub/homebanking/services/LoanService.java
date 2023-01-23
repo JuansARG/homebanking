@@ -13,4 +13,7 @@ public interface LoanService {
 
     Loan getLoanById(Long id);
 
+    Loan getLoanByName(String name);
+
+    void saveLoan(Loan loan);
 }

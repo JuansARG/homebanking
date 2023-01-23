@@ -33,7 +33,7 @@ public class WebAuthorization {
 //                .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards", "/api/transactions", "/api/loans").hasAuthority("CLIENT")
 //                .anyRequest().denyAll();
 
-        //ARREGLAR ESTO
+        //AGREGAR LAS URL DE LOS NUEVOS END POINTS
 
         // turn off checking for CSRF tokens
         http.csrf().disable();

@@ -15,7 +15,9 @@ public class Account {
     private String number;
     private LocalDate creationDate;
     private double balance;
-    private boolean enable = true;
+    private boolean enable;
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
@@ -23,18 +25,28 @@ public class Account {
     @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
     private Set<Transaction> transactions = new HashSet<>();
 
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
+    private Set<Card> cards = new HashSet<>();
+
     public Account() {
     }
-    public Account(String number, double balance, LocalDate creationDate, Client owner) {
-        this.number = "VIN-" + number;
+    public Account(String number, double balance, LocalDate creationDate, Client owner, boolean enableValue, AccountType accountType) {
+        this.number = number;
         this.creationDate = creationDate;
         this.balance = balance;
         this.client = owner;
+        this.enable = enableValue;
+        this.accountType = accountType;
     }
 
     public void addTransaction(Transaction transaction){
         transaction.setAccount(this);
         transactions.add(transaction);
+    }
+
+    public void addCard(Card card){
+        card.setAccount(this);
+        cards.add(card);
     }
 
     public Set<Transaction> getTransactions() {
@@ -79,5 +91,13 @@ public class Account {
 
     public void setEnable(boolean enable) {
         this.enable = enable;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 }

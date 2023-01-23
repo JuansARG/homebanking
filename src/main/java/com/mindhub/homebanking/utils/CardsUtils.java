@@ -1,12 +1,8 @@
 package com.mindhub.homebanking.utils;
 
-public class RandomNum {
+public final class CardsUtils {
 
-    public static String getRandomNumber4Vin(){
-        int num = (int) (Math.random() * (999999 - 100000) + 100000);
-        return String.valueOf(num);
-    }
-    public static String getRandonNumber4CardNum(){
+    public static String getCardNumber(){
         StringBuilder numCard = new StringBuilder();
         for (int i = 1; i <= 4; i++){
             int num = (int) (Math.random() * (9999 - 1000) + 1000);
@@ -14,7 +10,7 @@ public class RandomNum {
         }
         return String.valueOf(numCard);
     }
-    public static Integer getRandomNum4CVV(){
+    public static Integer getCVV(){
         return (int) (Math.random() * (999 - 100) + 100);
     }
 }

@@ -2,10 +2,11 @@ package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.dtos.AccountDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.services.AccountService;
 import com.mindhub.homebanking.services.ClientService;
-import com.mindhub.homebanking.utils.RandomNum;
+import com.mindhub.homebanking.utils.AccountsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -26,18 +26,18 @@ public class AccountController {
     @Autowired
     private ClientService clientService;
 
-    @RequestMapping("/accounts")
+    @GetMapping("/accounts")
     public List<AccountDTO> getAccounts(){
         return accountService.accountsToAccountsDTO(accountService.getAllAccounts());
     }
 
-    @RequestMapping("/accounts/{id}")
+    @GetMapping("/accounts/{id}")
     public AccountDTO getAccount(@PathVariable Long id){
         return accountService.accountToAccountDTO(accountService.getAccountById(id));
     }
 
-    @RequestMapping(path = "/clients/current/accounts", method = RequestMethod.POST)
-    public ResponseEntity<Object> createAccount(Authentication auth){
+    @PostMapping("/clients/current/accounts")
+    public ResponseEntity<Object> createAccount(@RequestParam AccountType type, Authentication auth){
         Client currentClient = clientService.getClientByEmail(auth.getName());
 
         if(currentClient == null){
@@ -48,13 +48,13 @@ public class AccountController {
             return new ResponseEntity<>("This customer already has 3 accounts", HttpStatus.FORBIDDEN);
         }
 
-        Account newAccount = accountService.createAccount(RandomNum.getRandomNumber4Vin(), 0, LocalDate.now(), currentClient);
+        Account newAccount = accountService.createAccount("VIN-" + AccountsUtils.getNumber4VIN(), 0, LocalDate.now(), currentClient, true, type);
         accountService.saveAccount(newAccount);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 
-    @RequestMapping(path = "/clients/current/accounts/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping("/clients/current/accounts/{id}")
     public ResponseEntity<Object> deleteAccount(@PathVariable Long id,
                                                 Authentication auth){
         Client currentClient = clientService.getClientByEmail(auth.getName());
@@ -76,8 +76,6 @@ public class AccountController {
             return new ResponseEntity<>("The account you want to delete does not belong to the authenticated client.", HttpStatus.FORBIDDEN);
         }
 
-        //currentAccount.setEnable(false);
-        //accountService.saveAccount(currentAccount);
         accountService.deleteAccountById(id);
         return new ResponseEntity<>("The account has been deleted.", HttpStatus.OK);
     }

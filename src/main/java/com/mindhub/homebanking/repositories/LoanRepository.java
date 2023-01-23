@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @RepositoryRestResource
 public interface LoanRepository extends JpaRepository<Loan, Long> {
+
+    Loan findByName(String name);
 }

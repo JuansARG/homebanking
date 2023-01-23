@@ -10,6 +10,7 @@ public class TransactionDTO {
     private double amount;
     private String description;
     private LocalDateTime date;
+    private double updateBalance;
 
     public TransactionDTO(Transaction transaction) {
         this.id = transaction.getId();
@@ -17,6 +18,7 @@ public class TransactionDTO {
         this.amount = transaction.getAmount();
         this.description = transaction.getDescription();
         this.date = transaction.getDate();
+        this.updateBalance = transaction.getUpdateBalance();
     }
 
     public Long getId() {
@@ -37,5 +39,21 @@ public class TransactionDTO {
 
     public LocalDateTime getDate() {
         return date;
+    }
+
+    public double getUpdateBalance() {
+        return updateBalance;
+    }
+
+    @Override
+    public String toString() {
+        return "TransactionDTO{" +
+                "id=" + id +
+                ", type=" + type +
+                ", amount=" + amount +
+                ", description='" + description + '\'' +
+                ", date=" + date +
+                ", updateBalance=" + updateBalance +
+                '}';
     }
 }

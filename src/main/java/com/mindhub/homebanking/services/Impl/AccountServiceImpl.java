@@ -2,8 +2,10 @@ package com.mindhub.homebanking.services.Impl;
 
 import com.mindhub.homebanking.dtos.AccountDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.AccountRepository;
+import com.mindhub.homebanking.repositories.TransactionRepository;
 import com.mindhub.homebanking.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    TransactionRepository transactionRepository;
     @Override
     public List<Account> getAllAccounts() {
         return accountRepository.findAll().stream().filter(Account::isEnable).toList();
@@ -49,13 +54,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account createAccount(String number, double balance, LocalDate creationDate, Client owner) {
-        return new Account(number, balance, creationDate, owner);
+    public Account createAccount(String number, double balance, LocalDate creationDate, Client owner, boolean enableValue, AccountType type) {
+        return new Account(number, balance, creationDate, owner, enableValue, type);
     }
 
     @Override
     public Account getAccountByNumber(String number) {
-        if(accountRepository.findByNumber(number).isEnable()){
+        if(accountRepository.findByNumber(number) != null){
             return accountRepository.findByNumber(number);
         }else {
             return null;
@@ -67,6 +72,8 @@ public class AccountServiceImpl implements AccountService {
         Account account = accountRepository.findById(id).orElse(null);
         if(account != null){
             account.setEnable(false);
+            account.getTransactions().forEach(transaction -> transaction.setEnable(false));
+
             accountRepository.save(account);
         }
     }
