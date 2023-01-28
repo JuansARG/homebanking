@@ -19,7 +19,7 @@ createApp({
     methods: {
         cargarDatos() {
             this.id = new URLSearchParams(document.location.search).get("id");
-            axios.get("http://localhost:8080/api/clients/current")
+            axios.get("/api/clients/current")
                 .then(respuesta => {
                     this.json = respuesta;
                     this.cliente = this.json.data;
@@ -48,8 +48,8 @@ createApp({
                         icon: "success",
                         text: "Will be redirected, see you soon.",
                     }).then(() => {
-                        axios.post("http://localhost:8080/api/logout")
-                            .then(() => location.href = "http://localhost:8080/web/login.html")
+                        axios.post("/api/logout")
+                            .then(() => location.href = "/web/login.html")
                             .catch(e => console.log(e));
                     })
                 }

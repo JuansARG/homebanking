@@ -19,13 +19,13 @@ createApp({
     },
     methods: {
         cargarDatos() {
-            axios.get("http://localhost:8080/rest/clients")
+            axios.get("/rest/clients")
                 .then((respuesta) => {
                     console.log(respuesta)
                     this.data = respuesta.data;
                     this.clientes = respuesta.data._embedded.clients;
                     console.log(this.clientes)
-                    this.uri = "http://localhost:8080/rest/clients/";
+                    this.uri = "/rest/clients/";
                 })
                 .catch(e => console.log(e));
         },
@@ -50,7 +50,7 @@ createApp({
         },
 
         enviarCliente(nombre, apellido, email) {
-            axios.post("http://localhost:8080/rest/clients", {
+            axios.post("/rest/clients", {
                 firstName: nombre,
                 lastName: apellido,
                 email: email

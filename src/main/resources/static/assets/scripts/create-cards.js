@@ -18,7 +18,7 @@ createApp({
     },
     methods: {
         cargarDatos() {
-            axios.get("http://localhost:8080/api/clients/current")
+            axios.get("/api/clients/current")
                 .then(r => {
                     this.cliente = r.data;
                     this.tarjetas = this.cliente.cards;
@@ -73,13 +73,13 @@ createApp({
                 confirmButtonText: 'Yes!'
             }).then(r => {
                 if (r.isConfirmed) {
-                    axios.post("http://localhost:8080/api/clients/current/cards", 
+                    axios.post("/api/clients/current/cards", 
                             `type=${this.typeCard}&color=${this.colorCard}&numberOfAccount=${this.cuentaSeleccionada}`)
                         .then(() => {
                             Swal.fire({
                                 icon: "success",
                                 text: "Your card has been requested.",
-                            }).then(() => location.href = "http://localhost:8080/web/cards.html")
+                            }).then(() => location.href = "/web/cards.html")
                             })
                         .catch(e => console.log(e));
                 }
@@ -98,8 +98,8 @@ createApp({
                         icon: "success",
                         text: "Will be redirected, see you soon.",
                     }).then(() => {
-                        axios.post("http://localhost:8080/api/logout")
-                            .then(() => location.href = "http://localhost:8080/web/login.html")
+                        axios.post("/api/logout")
+                            .then(() => location.href = "/web/login.html")
                             .catch(e => console.log(e));
                     })
                 }
