@@ -1,7 +1,9 @@
 package com.mindhub.homebanking.controllers;
 
+import com.mindhub.homebanking.dtos.CardDTO;
 import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.models.Client;
+import com.mindhub.homebanking.services.CardService;
 import com.mindhub.homebanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,9 @@ public class ClientController {
 
     @Autowired
     private ClientService clientService;
+
+    @Autowired
+    private CardService cardService;
 
     @GetMapping("/clients")
     public List<ClientDTO> getClients(){
@@ -65,6 +70,9 @@ public class ClientController {
         return clientService.clientToClientDTO(clientService.getClientByEmail(auth.getName()));
     }
 
-
+    @GetMapping("/clients/current/cards")
+    public List<CardDTO> getCardsOfClient(Authentication auth){
+        return cardService.cardsToCardsDTO(clientService.getClientByEmail(auth.getName()).getCards().stream().toList());
+    }
 
 }

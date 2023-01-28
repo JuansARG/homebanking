@@ -73,7 +73,7 @@ createApp({
                             title: 'Oops...',
                             text: e.response.data
                         })
-                    })
+                    }).catch(e => console.log(e));
                 }
             })
         },
