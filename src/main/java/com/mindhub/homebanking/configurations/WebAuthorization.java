@@ -22,21 +22,21 @@ public class WebAuthorization {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
-//        http.authorizeRequests()
-//                .antMatchers("/web/login.html", "/assets/**").permitAll()
-//                .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
-//                .antMatchers("/manager.html", "/h2-console", "/rest/**").hasAuthority("ADMIN")
-//                .antMatchers("/web/**", "/api/clients/current").hasAuthority("CLIENT")
+        http.authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/web/login.html", "/assets/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
+                .antMatchers(HttpMethod.GET, "/manager.html", "/h2-console", "/rest/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET,"/web/**", "/api/clients/current").hasAuthority("CLIENT")
 //                .antMatchers(HttpMethod.GET, "/api/loans").hasAuthority("CLIENT")
-//                .antMatchers(HttpMethod.PUT, "/api/loans").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.PUT, "/api/loans").hasAuthority("CLIENT")
 //                .antMatchers(HttpMethod.DELETE, "api/clients/current/accounts/**").hasAuthority("CLIENT")
 //                .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards", "/api/transactions", "/api/loans").hasAuthority("CLIENT")
-//                .anyRequest().denyAll();
+                .anyRequest().denyAll();
 
         //AGREGAR LAS URL DE LOS NUEVOS END POINTS
 
         // turn off checking for CSRF tokens
-        http.csrf().disable();
+        //http.csrf().disable();
 
         //disabling frameOptions so h2-console can be accessed
         http.headers().frameOptions().disable();
