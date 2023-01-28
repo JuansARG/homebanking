@@ -20,19 +20,17 @@ createApp({
     },
     methods: {
         cargarDatos() {;
-            axios.get("http://localhost:8080/api/clients/current")
+            axios.get("/api/clients/current")
                 .then(respuesta => {
                     this.cliente = respuesta.data;
                     this.cuentas = this.cliente.account;
                     this.prestamos = this.cliente.loans.sort((a, b) => a.id - b.id);
-                    console.log(this.cuentas);
-                    console.log(this.prestamos);
                 })
                 .catch(e => console.log(e));
         },
 
         pagarCuotas(){
-            axios.put("http://localhost:8080/api/loans", `accountNumber=${this.cuenta}&idCurrentClientLoan=${this.idPrestamo}&dues=${this.cuotasParaPagar}&value=${this.valorDeCuota}`)
+            axios.put("/api/loans", `accountNumber=${this.cuenta}&idCurrentClientLoan=${this.idPrestamo}&dues=${this.cuotasParaPagar}&value=${this.valorDeCuota}`)
                     .then(r => {
                         console.log(r);
                         Swal.fire({
@@ -42,7 +40,7 @@ createApp({
                             Swal.fire({
                                 icon: "success",
                                 text: "The page will reload to display the changes..",
-                            }).then(() => location.href = "http://localhost:8080/web/accounts.html")
+                            }).then(() => location.href = "/web/accounts.html")
                         })
                     })
                     .catch(e => {
@@ -67,8 +65,8 @@ createApp({
                         icon: "success",
                         text: "Will be redirected, see you soon.",
                     }).then(() => {
-                        axios.post("http://localhost:8080/api/logout")
-                            .then(() => location.href = "http://localhost:8080/web/login.html")
+                        axios.post("/api/logout")
+                            .then(() => location.href = "/web/login.html")
                             .catch(e => console.log(e));
                     })
                 }
@@ -100,7 +98,7 @@ createApp({
                                     text: "Your account has been created.",
                                 }).then(() => {
                                     console.log(value);
-                                    axios.post("http://localhost:8080/api/clients/current/accounts", `type=${value}`)
+                                    axios.post("/api/clients/current/accounts", `type=${value}`)
                                     .then(() => location.reload())
                                     .catch(e => console.log(e));
                                 })
@@ -126,13 +124,13 @@ createApp({
                 confirmButtonText: 'Yes!'
             }).then(r =>{
                 if(r.isConfirmed){
-                    axios.delete(`http://localhost:8080/api/clients/current/accounts/${id}`)
+                    axios.delete(`/api/clients/current/accounts/${id}`)
                     .then(r => {
                         console.log(r)
                         Swal.fire({
                             icon: "success",
                             text: r.data,
-                        }).then(() => location.href = "http://localhost:8080/web/accounts.html")
+                        }).then(() => location.href = "/web/accounts.html")
                     })
                     .catch(e => {
                         Swal.fire({
