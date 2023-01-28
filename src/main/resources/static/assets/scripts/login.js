@@ -22,7 +22,7 @@ createApp({
             }else{
                 axios.post('/api/login', `email=${this.email}&password=${this.password}`)
                 .then(() => location.href = "/web/accounts.html")
-                .catch(() => {
+                .catch((e) => {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
@@ -30,6 +30,7 @@ createApp({
                     })
                     this.email = ""
                     this.password = ""
+                    console.log(e);
                 });
             }
             
