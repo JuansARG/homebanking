@@ -24,13 +24,20 @@ public class WebAuthorization {
 
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/web/login.html", "/assets/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/clients", "/api/login").permitAll()
                 .antMatchers(HttpMethod.GET,"/web/**", "/api/clients/current").hasAuthority("CLIENT")
-//                .antMatchers(HttpMethod.GET, "/manager.html", "/h2-console", "/rest/**").hasAuthority("ADMIN")
-//                .antMatchers(HttpMethod.GET, "/api/loans").hasAuthority("CLIENT")
-//                .antMatchers(HttpMethod.PUT, "/api/loans").hasAuthority("CLIENT")
-//                .antMatchers(HttpMethod.DELETE, "api/clients/current/accounts/**").hasAuthority("CLIENT")
-//                .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards", "/api/transactions", "/api/loans").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.GET, "/api/loans", "api/pdf/generate").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.PUT, "/api/loans").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/loans",
+                                                        "/api/clients/current/accounts",
+                                                        "/api/clients/current/cards",
+                                                        "/api/transactions",
+                                                        "/api/transactions/pay",
+                                                        "/api/logout").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.DELETE, "/api/clients/current/accounts/**",
+                                                            "/api/clients/current/cards/**").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.GET, "/manager.html", "/h2-console", "/rest/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST, "/create/loan").hasAuthority("ADMIN")
                 .anyRequest().denyAll();
 
         //AGREGAR LAS URL DE LOS NUEVOS END POINTS

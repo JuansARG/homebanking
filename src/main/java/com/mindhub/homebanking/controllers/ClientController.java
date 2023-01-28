@@ -70,9 +70,10 @@ public class ClientController {
         return clientService.clientToClientDTO(clientService.getClientByEmail(auth.getName()));
     }
 
-    @GetMapping("/clients/current/cards")
-    public List<CardDTO> getCardsOfClient(Authentication auth){
-        return cardService.cardsToCardsDTO(clientService.getClientByEmail(auth.getName()).getCards().stream().toList());
-    }
+    //EJERCICIO DEL EXPLAIN
+//    @GetMapping("/clients/current/cards")
+//    public List<CardDTO> getCardsOfClient(Authentication auth){
+//        return cardService.cardsToCardsDTO(clientService.getClientByEmail(auth.getName()).getCards().stream().toList());
+//    }
 
 }
