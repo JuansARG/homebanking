@@ -87,7 +87,7 @@
                             </li>
                             <li class="nav-item" v-if="prestamos.length < 3">
                                 <a  
-                                    href="http://localhost:8080/web/loan-application.html"
+                                    href="/web/loan-application.html"
                                     class="nav-link d-flex gap-1 align-items-center text-nowrap"
                                     style="padding: .5rem; font-size: .8rem;">
                                     Request new loan
@@ -95,7 +95,7 @@
                             </li>
                             <li class="nav-item">
                                 <a 
-                                    href="http://localhost:8080/web/transfers.html"
+                                    href="/web/transfers.html"
                                     class="nav-link d-flex gap-1 align-items-center"
                                     style="padding: .5rem; font-size: .8rem;">
                                     Transfers
@@ -103,7 +103,7 @@
                             </li>
                             <li class="nav-item">
                                 <a 
-                                    href="http://localhost:8080/web/cards.html"
+                                    href="/web/cards.html"
                                     class="nav-link d-flex gap-1 align-items-center"
                                     style="padding: .5rem; font-size: .8rem;">
                                     Cards
@@ -219,7 +219,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a class="btn btn-warning text-nowrap" :href="'http://localhost:8080/web/account.html?id='+ cuenta.id">More inf. about {{cuenta.number}}</a>
+                                <a class="btn btn-warning text-nowrap" :href="'/web/account.html?id='+ cuenta.id">More inf. about {{cuenta.number}}</a>
                             </div>
                         </template>
         
@@ -234,7 +234,7 @@
                     <div v-if="prestamos.length == 0">
                         <h2 class="m-0">No loans yet...</h2>
                         <a  
-                            href="http://localhost:8080/web/loan-application.html"
+                            href="/web/loan-application.html"
                             class="m-0 text-decoration-underline" 
                             style="color: #FFC23C;"
                             style="color: #FFC23C;">
