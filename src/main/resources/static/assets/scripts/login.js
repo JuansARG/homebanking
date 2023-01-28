@@ -20,8 +20,8 @@ createApp({
             }else if(this.password == ""){
                 this.alertaError("Invalid Password!")
             }else{
-                axios.post('http://localhost:8080/api/login', `email=${this.email}&password=${this.password}`)
-                .then(() => location.href = "http://localhost:8080/web/accounts.html")
+                axios.post('/api/login', `email=${this.email}&password=${this.password}`)
+                .then(() => location.href = "/web/accounts.html")
                 .catch(() => {
                     Swal.fire({
                         icon: 'error',
@@ -81,21 +81,21 @@ createApp({
                 confirmButtonText: 'Yes!'
             }).then(r => {
                 if (r.isConfirmed){
-                    axios.post('http://localhost:8080/api/clients', 
+                    axios.post('/api/clients', 
                         `firstname=${this.firstName}&lastname=${this.lastName}&email=${this.email}&password=${this.password}`)
                     .then(() =>{
                         Swal.fire({
                             icon: "success",
                             text: "Your account has been created.",
                         }).then(() => {
-                            axios.post('http://localhost:8080/api/login', `email=${this.email}&password=${this.password}`)
+                            axios.post('/api/login', `email=${this.email}&password=${this.password}`)
                                 .then(() => {
-                                    axios.post("http://localhost:8080/api/clients/current/accounts", `type=CURRENT`)
+                                    axios.post("/api/clients/current/accounts", `type=CURRENT`)
                                         .then(() => {
                                             Swal.fire({
                                                 icon: "success",
                                                 text: "You will be redirected to another page.",
-                                            }).then(() => location.href = "http://localhost:8080/web/accounts.html")
+                                            }).then(() => location.href = "/web/accounts.html")
                                         })
                                         .catch(e => console.log(e))
                                     })
