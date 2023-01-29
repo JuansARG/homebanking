@@ -50,15 +50,20 @@ public class CardController {
         // LUEGO SOBRE LAS ACTIVAS EMPIEZO A TRABAJAR
         List<Card> cardsTypeTarget = cards.stream().filter(card -> card.getType() == type).toList();
 
-        //COMPROBAR QUE LA CUENTA EXISTA Y QUE ESTE ENABLE/ACTIVADA
-        if(currentAccount == null || !currentAccount.isEnable()){
-            return new ResponseEntity<>("The account does not exist.", HttpStatus.FORBIDDEN);
+        //SI EL TYPE ES CREDIT NO IMPORTA COMPROBAR EL TEMA DE LA CUENTA
+        if(type.equals("DEBIT")){
+
+            //COMPROBAR QUE LA CUENTA EXISTA Y QUE ESTE ENABLE/ACTIVADA
+            if(currentAccount == null || !currentAccount.isEnable()){
+                return new ResponseEntity<>("The account does not exist.", HttpStatus.FORBIDDEN);
+            }
+
+            //COMPROBAR QUE LA CUENTA PERTENEZCA AL CLIENTE AUTHENTICADO
+            if(currentClient.getAccounts().stream().noneMatch(account -> account.getId().equals(currentAccount.getId()))){
+                return new ResponseEntity<>("The account does not belong to the authenticated client.", HttpStatus.FORBIDDEN);
+            }
         }
 
-        //COMPROBAR QUE LA CUENTA PERTENEZCA AL CLIENTE AUTHENTICADO
-        if(currentClient.getAccounts().stream().noneMatch(account -> account.getId().equals(currentAccount.getId()))){
-            return new ResponseEntity<>("The account does not belong to the authenticated client.", HttpStatus.FORBIDDEN);
-        }
 
         if(cards.size() == 6){
             return new ResponseEntity<>("The limit is 6 cards." ,HttpStatus.FORBIDDEN);

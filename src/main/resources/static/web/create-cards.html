@@ -143,14 +143,17 @@
                         <option value="GOLD">Gold</option>
                         <option value="SILVER">Silver</option>
                     </select>
-                    <p class="m-0">Step 3: Select the account you want to link it to.</p>
-                    <select class="form-select" v-model="cuentaSeleccionada">
-                        <option value="" disabled>Select Account</option>
-                        <template v-for="{ number } of cuentas">
-                            <option :value="number">{{number}}</option>
-                        </template>
+                    <template v-if="typeCard == `DEBIT`">
+                        <p class="m-0" >Step 3: Select the account you want to link it to.</p>
+                        <select class="form-select" v-model="cuentaSeleccionada">
+                            <option value="" disabled>Select Account</option>
+                            <template v-for="{ number } of cuentas">
+                                <option :value="number">{{number}}</option>
+                            </template>
                     </select>
-                    <p class="m-0">Step 4: Apply for card.</p>
+                    </template>
+                    
+                    <p class="m-0">Finally: Apply for card.</p>
                     <button class="btn" type="button" @click="solicitarTarjeta()">Apply</button>
                 </div>
             </form>

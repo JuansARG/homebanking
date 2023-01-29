@@ -27,7 +27,7 @@ createApp({
                     this.numeroDeCuenta = this.cuenta.number;
                     this.balance = this.cuenta.balance.toFixed(2);
                     this.fechaDeCreacion = this.cuenta.creationDate.substring(0,10).replaceAll("-", "/");
-                    this.transacciones = this.cuenta.transactions.sort((a, b) => a.id - b.id);
+                    this.transacciones = this.cuenta.transactions.sort((a, b) => b.id - a.id);
                     console.log(this.transacciones);
                 })
                 .catch(e => console.log(e));
