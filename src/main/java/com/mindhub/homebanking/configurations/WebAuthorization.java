@@ -25,6 +25,9 @@ public class WebAuthorization {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/clients", "/api/login").permitAll()
                 .antMatchers(HttpMethod.GET, "/web/login.html", "/assets/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/manager.html", "/rest/**").hasAuthority("ADMIN")
+                .antMatchers("/h2-console/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST, "/create/loan").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET,"/web/**", "/api/clients/current").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.GET, "/api/loans", "api/pdf/generate").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.PUT, "/api/loans").hasAuthority("CLIENT")
@@ -36,11 +39,7 @@ public class WebAuthorization {
                                                         "/api/logout").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.DELETE, "/api/clients/current/accounts/**",
                                                             "/api/clients/current/cards/**").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.GET, "/manager.html", "/h2-console", "/rest/**").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.POST, "/create/loan").hasAuthority("ADMIN")
                 .anyRequest().denyAll();
-
-        //AGREGAR LAS URL DE LOS NUEVOS END POINTS
 
         // turn off checking for CSRF tokens
         http.csrf().disable();
@@ -50,7 +49,6 @@ public class WebAuthorization {
 
         // if user is not authenticated, just send an authentication failure response
         http.exceptionHandling().authenticationEntryPoint((req, res, exception) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
-        //MIRAR METODOS DE LA RES
 
         // if login is successful, just clear the flags asking for authentication
         http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
