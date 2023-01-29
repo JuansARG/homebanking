@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface TransactionService {
 
-    Transaction createTransaction(TransactionType type, double amount, String description, LocalDateTime date, Account account, double updateBalance, boolean enable);
+    Transaction createTransaction(TransactionType type, double amount, String description, LocalDateTime date, Account account, double updateBalance);
 
     void saveTransaction(Transaction transaction);
 

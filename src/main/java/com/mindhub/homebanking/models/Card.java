@@ -30,6 +30,8 @@ public class Card {
     @JoinColumn(name = "client_id")
     private Client client;
 
+    private boolean enable;
+
     public Card(){
 
     }
@@ -44,6 +46,7 @@ public class Card {
         this.fromDate = fromDate;
         this.client = client;
         this.account = account;
+        this.enable = true;
     }
 
 
@@ -122,5 +125,30 @@ public class Card {
 
     public Account getAccount() {
         return account;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "id=" + id +
+                ", cardHolder='" + cardHolder + '\'' +
+                ", type=" + type +
+                ", color=" + color +
+                ", number='" + number + '\'' +
+                ", cvv=" + cvv +
+                ", thruDate=" + thruDate +
+                ", fromDate=" + fromDate +
+                ", account=" + account +
+                ", client=" + client +
+                ", enable=" + enable +
+                '}';
     }
 }

@@ -21,12 +21,12 @@ createApp({
     }, 
     methods:{
         cargarDatos(){
-            axios.get("http://localhost:8080/api/clients/current")
+            axios.get("/api/clients/current")
                 .then(r => {
                     this.cliente = r.data;
                     console.log(this.cliente);
                     this.cuentas = this.cliente.account;
-                    axios.get("http://localhost:8080/api/loans")
+                    axios.get("/api/loans")
                         .then(r => {
                             this.tiposDePrestamos = r.data;
                             console.log(this.tiposDePrestamos);
@@ -71,7 +71,7 @@ createApp({
                     if(r.isConfirmed){
                         axios({
                             method: "post",
-                            url: "http://localhost:8080/api/loans",
+                            url: "/api/loans",
                             data: {
                                 idOfLoan: this.tiposDePrestamos.find(p => p.name == this.nombrePrestamoSeleccionado).id,
                                 amount: this.montoSolicitado,
@@ -84,7 +84,7 @@ createApp({
                                 icon: "success",
                                 text: "Your loan has been requested.",
                             })
-                            .then(() => location.href = "http://localhost:8080/web/accounts.html")
+                            .then(() => location.href = "/web/accounts.html")
                             .catch(e => console.log(e));
                         })
                         .catch(e => {
@@ -112,8 +112,8 @@ createApp({
                         icon: "success",
                         text: "Will be redirected, see you soon.",
                     }).then(() => {
-                        axios.post("http://localhost:8080/api/logout")
-                            .then(() => location.href = "http://localhost:8080/web/login.html")
+                        axios.post("/api/logout")
+                            .then(() => location.href = "/web/login.html")
                             .catch(e => console.log(e));
                     })
                 }

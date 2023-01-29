@@ -28,14 +28,14 @@ public class Transaction {
     public Transaction(){
 
     }
-    public Transaction(TransactionType type, double amount, String description, LocalDateTime date, Account account, double updateBalance, boolean enable) {
+    public Transaction(TransactionType type, double amount, String description, LocalDateTime date, Account account, double updateBalance) {
         this.type = type;
         this.amount = amount;
         this.description = description;
         this.date = date;
         this.account = account;
         this.updateBalance = updateBalance;
-        this.enable = enable;
+        this.enable = true;
     }
 
 

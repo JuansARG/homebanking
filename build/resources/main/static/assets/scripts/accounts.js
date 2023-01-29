@@ -85,25 +85,34 @@ createApp({
                 showCancelButton: true,
                 inputValidator: (value) => {
                     return new Promise(() => {
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: `Are you sure you want to create a ${value} type account?`,
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonText: 'Yes!'
-                        }).then(r => {
-                            if(r.isConfirmed){
-                                Swal.fire({
-                                    icon: "success",
-                                    text: "Your account has been created.",
-                                }).then(() => {
-                                    console.log(value);
-                                    axios.post("/api/clients/current/accounts", `type=${value}`)
-                                    .then(() => location.reload())
-                                    .catch(e => console.log(e));
-                                })
-                            } 
-                        }).catch(e => console.log(e));
+                        if(value == ""){
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Invalid type!'
+                            })
+                        }else{
+                            Swal.fire({
+                                title: 'Are you sure?',
+                                text: `Are you sure you want to create a ${value} type account?`,
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonText: 'Yes!'
+                            }).then(r => {
+                                if(r.isConfirmed){
+                                    Swal.fire({
+                                        icon: "success",
+                                        text: "Your account has been created.",
+                                    }).then(() => {
+                                        console.log(value);
+                                        axios.post("/api/clients/current/accounts", `type=${value}`)
+                                        .then(() => location.reload())
+                                        .catch(e => console.log(e));
+                                    })
+                                } 
+                            }).catch(e => console.log(e));
+                        }
+                        
                     })
                 }
             })

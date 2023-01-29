@@ -83,7 +83,7 @@ public class LoanController {
 
         double finalAmount = loanApplicationDTO.getAmount() + (loanApplicationDTO.getAmount() * (currentLoan.getInterestRate()) / 100);
 
-        Transaction transaction = transactionService.createTransaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), currentLoan.getName() + " Loan Approved", LocalDateTime.now(), destinationAccount, destinationAccount.getBalance() + loanApplicationDTO.getAmount(), true);
+        Transaction transaction = transactionService.createTransaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), currentLoan.getName() + " Loan Approved", LocalDateTime.now(), destinationAccount, destinationAccount.getBalance() + loanApplicationDTO.getAmount());
         transactionService.saveTransaction(transaction);
 
         destinationAccount.setBalance(destinationAccount.getBalance() + loanApplicationDTO.getAmount());
@@ -97,9 +97,7 @@ public class LoanController {
                                                                     currentClient,
                                                                     currentLoan,
                                                                     LocalDate.now(),
-                                                                    finalAmount / loanApplicationDTO.getPayments(),
-                                                                    true
-                                                                    );
+                                                                    finalAmount / loanApplicationDTO.getPayments());
         clientLoanService.saveClientLoan(clientLoan);
 
         return new ResponseEntity<>("Everything has gone well!", HttpStatus.CREATED);
@@ -166,7 +164,7 @@ public class LoanController {
 
         String transactionDescription = "Advance of " + dues + " installments of " + typeOfLoan.getName();
 
-        Transaction transaction = transactionService.createTransaction(TransactionType.DEBIT, amount, transactionDescription, LocalDateTime.now(), currentAccount, currentAccount.getBalance() - amount, true);
+        Transaction transaction = transactionService.createTransaction(TransactionType.DEBIT, amount, transactionDescription, LocalDateTime.now(), currentAccount, currentAccount.getBalance() - amount);
         transactionService.saveTransaction(transaction);
 
         currentAccount.setBalance(currentAccount.getBalance() - amount);

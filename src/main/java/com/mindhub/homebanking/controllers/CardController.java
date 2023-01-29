@@ -45,7 +45,9 @@ public class CardController {
                                               Authentication auth){
         Client currentClient = clientService.getClientByEmail(auth.getName());
         Account currentAccount = accountService.getAccountByNumber(numberOfAccount);
-        List<Card> cards = currentClient.getCards().stream().toList();
+        // PRIMERO FILTRO Y GUARDO LAS TARJETAS ACTIVAS
+        List<Card> cards = currentClient.getCards().stream().filter(Card::isEnable).toList();
+        // LUEGO SOBRE LAS ACTIVAS EMPIEZO A TRABAJAR
         List<Card> cardsTypeTarget = cards.stream().filter(card -> card.getType() == type).toList();
 
         //COMPROBAR QUE LA CUENTA EXISTA Y QUE ESTE ENABLE/ACTIVADA

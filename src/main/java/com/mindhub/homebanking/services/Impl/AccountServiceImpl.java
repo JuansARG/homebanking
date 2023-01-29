@@ -54,8 +54,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account createAccount(String number, double balance, LocalDate creationDate, Client owner, boolean enableValue, AccountType type) {
-        return new Account(number, balance, creationDate, owner, enableValue, type);
+    public Account createAccount(String number, double balance, LocalDate creationDate, Client owner, AccountType type) {
+        return new Account(number, balance, creationDate, owner, type);
     }
 
     @Override

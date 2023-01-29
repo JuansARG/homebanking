@@ -60,11 +60,9 @@ public class TransactionController {
             return new ResponseEntity<>("The destination account number is invalid.", HttpStatus.FORBIDDEN);
         }
 
-
         if(numberRootAccount.equalsIgnoreCase(numberDestinationAccount)){
             return new ResponseEntity<>("The source account and the destination account are the same.", HttpStatus.FORBIDDEN);
         }
-
 
         if(rootAccount == null){
             return new ResponseEntity<>("The source account does not exist.", HttpStatus.FORBIDDEN);
@@ -84,8 +82,8 @@ public class TransactionController {
             return new ResponseEntity<>("Insufficient funds.", HttpStatus.FORBIDDEN);
         }
 
-        Transaction transaction1 = transactionService.createTransaction(TransactionType.DEBIT, amount, description + " -> " + destinationAccount.getNumber(), LocalDateTime.now(), rootAccount, rootAccount.getBalance() - amount, true);
-        Transaction transaction2 = transactionService.createTransaction(TransactionType.CREDIT, amount, description + " -> " + rootAccount.getNumber(), LocalDateTime.now(), destinationAccount, destinationAccount.getBalance() + amount, true);
+        Transaction transaction1 = transactionService.createTransaction(TransactionType.DEBIT, amount, description + " -> " + destinationAccount.getNumber(), LocalDateTime.now(), rootAccount, rootAccount.getBalance() - amount);
+        Transaction transaction2 = transactionService.createTransaction(TransactionType.CREDIT, amount, description + " -> " + rootAccount.getNumber(), LocalDateTime.now(), destinationAccount, destinationAccount.getBalance() + amount);
 
         transactionService.saveTransaction(transaction1);
         transactionService.saveTransaction(transaction2);
@@ -173,8 +171,7 @@ public class TransactionController {
                 cardApplicationDTO.getDescription(),
                 LocalDateTime.now(),
                 currentAccount,
-                currentAccount.getBalance() - cardApplicationDTO.getAmount(),
-                true);
+                currentAccount.getBalance() - cardApplicationDTO.getAmount());
 
         currentAccount.setBalance(currentAccount.getBalance() - cardApplicationDTO.getAmount());
 

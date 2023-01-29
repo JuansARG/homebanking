@@ -16,7 +16,7 @@ createApp({
     },
     methods: {
         cargarDatos(){
-            axios.get("http://localhost:8080/api/clients/current")
+            axios.get("/api/clients/current")
                 .then(r => {
                     this.json = r;
                     this.cliente = this.json.data;
@@ -42,8 +42,8 @@ createApp({
                         icon: "success",
                         text: "Will be redirected, see you soon.",
                     }).then(() => {
-                        axios.post("http://localhost:8080/api/logout")
-                            .then(() => location.href = "http://localhost:8080/web/login.html")
+                        axios.post("/api/logout")
+                            .then(() => location.href = "/web/login.html")
                             .catch(e => console.log(e));
                     })
                 }
@@ -61,12 +61,12 @@ createApp({
                 if(r.isConfirmed){
                     axios({
                         method: 'delete',
-                        url: `http://localhost:8080/api/clients/current/cards/${id}`
+                        url: `/api/clients/current/cards/${id}`
                     }).then(() => {
                         Swal.fire({
                             icon: "success",
                             text: "The card has been deleted.",
-                        }).then(() => location.href = 'http://localhost:8080/web/cards.html');
+                        }).then(() => location.href = '/web/cards.html');
                     }).catch(e => {
                         Swal.fire({
                             icon: 'error',

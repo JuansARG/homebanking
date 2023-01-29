@@ -34,7 +34,7 @@ public class ClientLoan {
 
     }
 
-    public ClientLoan(Double amount, Double finalAmount, Integer payments, Client client, Loan loan, LocalDate applicationDate, double quotaValue, boolean enableValue) {
+    public ClientLoan(Double amount, Double finalAmount, Integer payments, Client client, Loan loan, LocalDate applicationDate, double quotaValue) {
         this.requestAmount = amount;
         this.finalAmount = finalAmount;
         this.restAmount = finalAmount;
@@ -44,7 +44,7 @@ public class ClientLoan {
         this.loan = loan;
         this.applicationDate = applicationDate;
         this.quotaValue = quotaValue;
-        this.enable = enableValue;
+        this.enable = true;
     }
 
     public Long getId() {

@@ -48,7 +48,7 @@ public class AccountController {
             return new ResponseEntity<>("This customer already has 3 accounts", HttpStatus.FORBIDDEN);
         }
 
-        Account newAccount = accountService.createAccount("VIN-" + AccountsUtils.getNumber4VIN(), 0, LocalDate.now(), currentClient, true, type);
+        Account newAccount = accountService.createAccount("VIN-" + AccountsUtils.getNumber4VIN(), 0, LocalDate.now(), currentClient, type);
         accountService.saveAccount(newAccount);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -59,6 +59,7 @@ public class AccountController {
                                                 Authentication auth){
         Client currentClient = clientService.getClientByEmail(auth.getName());
         Account currentAccount = accountService.getAccountById(id);
+
 
         if(currentClient == null){
             return new ResponseEntity<>("The client is not authenticated..", HttpStatus.FORBIDDEN);
@@ -75,6 +76,8 @@ public class AccountController {
         if(currentClient.getAccounts().stream().noneMatch(account -> account.getId().equals(id))){
             return new ResponseEntity<>("The account you want to delete does not belong to the authenticated client.", HttpStatus.FORBIDDEN);
         }
+
+        currentAccount.getCards().forEach(card -> card.setEnable(false));
 
         accountService.deleteAccountById(id);
         return new ResponseEntity<>("The account has been deleted.", HttpStatus.OK);

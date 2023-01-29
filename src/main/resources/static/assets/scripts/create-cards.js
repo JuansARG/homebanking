@@ -81,7 +81,12 @@ createApp({
                                 text: "Your card has been requested.",
                             }).then(() => location.href = "/web/cards.html")
                             })
-                        .catch(e => console.log(e));
+                        .catch(e =>{
+                            Swal.fire({
+                                icon: "error",
+                                text: e.response.data,
+                            })
+                        });
                 }
             }).catch(e => console.log(e));
         },

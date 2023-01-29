@@ -3,7 +3,6 @@ package com.mindhub.homebanking.services.Impl;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
 import com.mindhub.homebanking.dtos.TransactionDTO;
-import com.mindhub.homebanking.models.Transaction;
 import com.mindhub.homebanking.services.PDFGeneratorService;
 import com.mindhub.homebanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +27,8 @@ public class PDFGeneratorServiceImpl implements PDFGeneratorService {
                             .equalsIgnoreCase(accountNumber))
                             .map(transaction -> transactionService.transactionToTransactionDTO(transaction))
                             .toList();
-        //List<TransactionDTO> transactions = transactionService.transactionsToTransactionsDTO(transactionService.findByDateBetween(fromDate, toDate));
 
+        //List<TransactionDTO> transactions = transactionService.transactionsToTransactionsDTO(transactionService.findByDateBetween(fromDate, toDate));
 
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());

@@ -19,8 +19,8 @@ public class TransactionServiceImpl implements TransactionService {
     private TransactionRepository transactionRepository;
 
     @Override
-    public Transaction createTransaction(TransactionType type, double amount, String description, LocalDateTime date, Account account, double updateBalance, boolean enable) {
-        return new Transaction(type, amount, description, date, account, updateBalance, true);
+    public Transaction createTransaction(TransactionType type, double amount, String description, LocalDateTime date, Account account, double updateBalance) {
+        return new Transaction(type, amount, description, date, account, updateBalance);
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public interface ClientLoanService {
 
-    ClientLoan createClientLoan(Double amount, Double finalAmount, Integer payments, Client client, Loan loan, LocalDate applicationDate, double quotaValue, boolean enableValue);
+    ClientLoan createClientLoan(Double amount, Double finalAmount, Integer payments, Client client, Loan loan, LocalDate applicationDate, double quotaValue);
 
     void saveClientLoan(ClientLoan clientLoan);
 

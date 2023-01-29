@@ -50,27 +50,27 @@ public class HomebankingApplication {
 			List<Client> clients = List.of(client1, client2, client3, client4, admin);
 			clientRepository.saveAll(clients);
 
-			Account account1 = new Account("VIN" + AccountsUtils.getNumber4VIN(), 5000, LocalDate.now(), client1, true, AccountType.CURRENT);
-			Account account2 = new Account("VIN" + AccountsUtils.getNumber4VIN(), 7500, LocalDate.now(), client1, true, AccountType.SAVING);
-			Account account3 = new Account("VIN" + AccountsUtils.getNumber4VIN(), 5000, LocalDate.now(), client2, true, AccountType.CURRENT);
-			Account account4 = new Account("VIN" + AccountsUtils.getNumber4VIN(), 7500, LocalDate.now(), client2, true, AccountType.CURRENT);
+			Account account1 = new Account("VIN" + AccountsUtils.getNumber4VIN(), 5000, LocalDate.now(), client1, AccountType.CURRENT);
+			Account account2 = new Account("VIN" + AccountsUtils.getNumber4VIN(), 7500, LocalDate.now(), client1, AccountType.SAVING);
+			Account account3 = new Account("VIN" + AccountsUtils.getNumber4VIN(), 5000, LocalDate.now(), client2, AccountType.CURRENT);
+			Account account4 = new Account("VIN" + AccountsUtils.getNumber4VIN(), 7500, LocalDate.now(), client2, AccountType.CURRENT);
 
 			List<Account> accounts = List.of(account1, account2, account3, account4);
 			accountRepository.saveAll(accounts);
 
-			Transaction transaction1 = new Transaction(TransactionType.DEBIT, 1000, "Corte de Pelo", LocalDateTime.now(), account1, account1.getBalance() - 1000, true);
+			Transaction transaction1 = new Transaction(TransactionType.DEBIT, 1000, "Corte de Pelo", LocalDateTime.now(), account1, account1.getBalance() - 1000);
 			account1.setBalance(account1.getBalance() - 1000);
-			Transaction transaction2 = new Transaction(TransactionType.CREDIT, 6000, "Reintegro Lentes", LocalDateTime.now(), account1, account1.getBalance() + 6000, true);
+			Transaction transaction2 = new Transaction(TransactionType.CREDIT, 6000, "Reintegro Lentes", LocalDateTime.now(), account1, account1.getBalance() + 6000);
 			account1.setBalance(account1.getBalance() + 6000);
-			Transaction transaction3 = new Transaction(TransactionType.DEBIT, 2000, "Picada", LocalDateTime.now(), account1, account1.getBalance() - 2000, true);
+			Transaction transaction3 = new Transaction(TransactionType.DEBIT, 2000, "Picada", LocalDateTime.now(), account1, account1.getBalance() - 2000);
 			account1.setBalance(account1.getBalance() - 2000);
-			Transaction transaction4 = new Transaction(TransactionType.DEBIT, 3000, "Mouse", LocalDateTime.now(), account1, account1.getBalance() - 3000, true);
+			Transaction transaction4 = new Transaction(TransactionType.DEBIT, 3000, "Mouse", LocalDateTime.now(), account1, account1.getBalance() - 3000);
 			account1.setBalance(account1.getBalance() - 3000);
-			Transaction transaction5 = new Transaction(TransactionType.CREDIT, 6000, "Reintegro Teclado", LocalDateTime.now(), account1, account1.getBalance() + 6000, true);
+			Transaction transaction5 = new Transaction(TransactionType.CREDIT, 6000, "Reintegro Teclado", LocalDateTime.now(), account1, account1.getBalance() + 6000);
 			account1.setBalance(account1.getBalance() + 6000);
-			Transaction transaction6 = new Transaction(TransactionType.DEBIT, 2000, "Cervezas", LocalDateTime.now(), account1, account1.getBalance() - 2000, true);
+			Transaction transaction6 = new Transaction(TransactionType.DEBIT, 2000, "Cervezas", LocalDateTime.now(), account1, account1.getBalance() - 2000);
 			account1.setBalance(account1.getBalance() - 2000);
-			Transaction transaction7 = new Transaction(TransactionType.CREDIT, 600, "Reintegro Youtube Premium", LocalDateTime.now(), account3, account3.getBalance() + 600, true);
+			Transaction transaction7 = new Transaction(TransactionType.CREDIT, 600, "Reintegro Youtube Premium", LocalDateTime.now(), account3, account3.getBalance() + 600);
 			account3.setBalance(account3.getBalance() + 600);
 
 			List<Transaction> transactions = List.of(transaction1, transaction2, transaction3, transaction4, transaction5, transaction6, transaction7);
@@ -89,10 +89,10 @@ public class HomebankingApplication {
 			List<Loan> loanList = List.of(mortgageLoan, personalLoan, carLoan);
 			loanRepository.saveAll(loanList);
 
-			ClientLoan clientLoan1 = new ClientLoan(400000D, 400000D * 1.65, 60, client1, mortgageLoan, LocalDate.now(), 400000 / 60, true);
-			ClientLoan clientLoan2 = new ClientLoan(50000D, 50000D * 1.4, 12, client1, personalLoan, LocalDate.now(), 50000 / 12, true);
-			ClientLoan clientLoan3 = new ClientLoan(100000D, 100000D * 1.4, 24, client2, personalLoan, LocalDate.now(), 100000 / 24, true);
-			ClientLoan clientLoan4 = new ClientLoan(200000D, 200000D * 1.5, 36, client2, carLoan, LocalDate.now(), 200000 / 36, true);
+			ClientLoan clientLoan1 = new ClientLoan(400000D, 400000D * 1.65, 60, client1, mortgageLoan, LocalDate.now(), 400000 / 60);
+			ClientLoan clientLoan2 = new ClientLoan(50000D, 50000D * 1.4, 12, client1, personalLoan, LocalDate.now(), 50000 / 12);
+			ClientLoan clientLoan3 = new ClientLoan(100000D, 100000D * 1.4, 24, client2, personalLoan, LocalDate.now(), 100000 / 24);
+			ClientLoan clientLoan4 = new ClientLoan(200000D, 200000D * 1.5, 36, client2, carLoan, LocalDate.now(), 200000 / 36);
 
 			List<ClientLoan> clientLoanList = List.of(clientLoan1, clientLoan2, clientLoan3, clientLoan4);
 			clientLoanRepository.saveAll(clientLoanList);

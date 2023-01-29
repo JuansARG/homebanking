@@ -16,8 +16,8 @@ public class ClientLoanImpl implements ClientLoanService {
     ClientLoanRepository clientLoanRepository;
 
     @Override
-    public ClientLoan createClientLoan(Double amount, Double finalAmount, Integer payments, Client client, Loan loan, LocalDate applicationDate, double quotaValue, boolean enableValue) {
-        return new ClientLoan(amount, finalAmount, payments, client, loan, applicationDate, quotaValue, enableValue);
+    public ClientLoan createClientLoan(Double amount, Double finalAmount, Integer payments, Client client, Loan loan, LocalDate applicationDate, double quotaValue) {
+        return new ClientLoan(amount, finalAmount, payments, client, loan, applicationDate, quotaValue);
     }
 
     @Override

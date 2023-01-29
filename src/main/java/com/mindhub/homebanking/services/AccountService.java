@@ -20,7 +20,7 @@ public interface AccountService {
 
     void saveAccount(Account account);
 
-    Account createAccount(String number, double balance, LocalDate creationDate, Client owner, boolean EnableValue, AccountType type);
+    Account createAccount(String number, double balance, LocalDate creationDate, Client owner, AccountType type);
 
     Account getAccountByNumber(String number);
 

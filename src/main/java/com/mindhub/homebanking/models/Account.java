@@ -31,12 +31,12 @@ public class Account {
 
     public Account() {
     }
-    public Account(String number, double balance, LocalDate creationDate, Client owner, boolean enableValue, AccountType accountType) {
+    public Account(String number, double balance, LocalDate creationDate, Client owner, AccountType accountType) {
         this.number = number;
         this.creationDate = creationDate;
         this.balance = balance;
         this.client = owner;
-        this.enable = enableValue;
+        this.enable = true;
         this.accountType = accountType;
     }
 
@@ -100,5 +100,13 @@ public class Account {
 
     public void setAccountType(AccountType accountType) {
         this.accountType = accountType;
+    }
+
+    public Set<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(Set<Card> cards) {
+        this.cards = cards;
     }
 }
