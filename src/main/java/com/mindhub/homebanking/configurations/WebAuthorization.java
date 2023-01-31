@@ -36,6 +36,7 @@ public class WebAuthorization {
                                                         "/api/clients/current/cards",
                                                         "/api/transactions",
                                                         "/api/transactions/pay",
+                                                        "/api/pay",
                                                         "/api/logout").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.DELETE, "/api/clients/current/accounts/**",
                                                             "/api/clients/current/cards/**").hasAuthority("CLIENT")

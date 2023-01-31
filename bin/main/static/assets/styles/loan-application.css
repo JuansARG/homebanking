@@ -10,12 +10,13 @@
 }
 
 body{
-    background-image: url(../img/hong-feng-PaRlzwq1H20-unsplash.jpg);
+    background-image: url(../img/pexels-misael-garcia-1707820.jpg);
     background-size: cover;
 }
 
 h1 {
     font-family: 'Libre Baskerville', serif;
+    font-size: 4rem;
 }
 
 .navbar {
@@ -41,6 +42,12 @@ h1 {
     font-weight: bold;
 }
 
+.nav-link:hover{
+    background-color: #777;
+    border-color: #100720;
+    color: #FFC23C;
+}
+
 .active {
     background-color: #100720;
     color: #FFC23C !important;
@@ -50,6 +57,46 @@ main {
     min-height: 70vh;
 }
 
+.loan-apply{
+    width: 25rem;
+    background-color: rgba(255, 255, 255, 0.30);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur( 4px);
+    border: 1px solid  rgba(255, 255, 255, 0.18);
+}
+
+.btn{
+    color: #FFC23C;
+    background-color: #100720;
+}
+
+.btn:hover{
+    color: #100720;
+    background-color: #FFC23C;
+}
+
+.form-control:focus, .form-select:focus{
+    border-color: #100720!important;
+    box-shadow: 0 0 0 0.25rem #FFC23C!important;
+}
+
+.swal2-cancel {
+    color: #FFC23C !important;
+    background-color: #100720 !important;
+    border: 2px solid #FFC23C !important;
+    font-weight: bold !important;
+}
+
+.swal2-confirm {
+    color: #100720 !important;
+    background-color: #FFC23C !important;
+    border: 2px solid #100720 !important;
+    font-weight: bold !important;
+}
+
+.swal2-confirm:focus{
+    box-shadow: 0 0 0 3px rgb(110 120 129 / 50%)!important;
+}
 
 footer{
     color: #100720;
@@ -68,3 +115,4 @@ footer{
         justify-content: space-around;
     }
 }
+

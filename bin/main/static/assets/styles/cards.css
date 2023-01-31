@@ -19,7 +19,7 @@ h1{
 }
 
 main{
-    min-height: 62vh;
+    min-height: 66vh;
 }
 
 .navbar{
@@ -45,21 +45,59 @@ main{
     font-weight: bold;
 }
 
+.nav-link:hover{
+    background-color: #777;
+    border-color: #100720;
+    color: #FFC23C;
+}
+
 .active{
     background-color: #100720;
     color: #FFC23C!important;
 }
 
+.container{
+    background-color: rgba(255, 255, 255, 0.30);
+    backdrop-filter: blur( 4px);
+    border: 1px solid  rgba(255, 255, 255, 0.18);
+}
+
 .titanium{
-    background-color: #FFC23C;
+    color: #FFC23C!important;
+    background-color: #100720;
+    border: 2px solid #FFC23C;
+}
+
+.expired{
+    color: red!important;
 }
 
 .gold{
     background-color: gold;
+    border: 2px solid #100720;
 }
 
 .silver{
     background-color: silver;
+    border: 2px solid #100720;
+}
+
+.swal2-cancel {
+    color: #FFC23C !important;
+    background-color: #100720 !important;
+    border: 2px solid #FFC23C !important;
+    font-weight: bold !important;
+}
+
+.swal2-confirm {
+    color: #100720 !important;
+    background-color: #FFC23C !important;
+    border: 2px solid #100720 !important;
+    font-weight: bold !important;
+}
+
+.swal2-confirm:focus{
+    box-shadow: 0 0 0 3px rgb(110 120 129 / 50%)!important;
 }
 
 footer{
@@ -70,7 +108,10 @@ footer{
 @media (min-width: 631px){
     #contenedorTarjetas{
         flex-direction: row!important;
-        justify-content: space-between;
+    }
+
+    #contenedorTarjetasCredito, #contenedorTarjetasDebito{
+        width: 50%;
     }
 }
 
@@ -84,5 +125,11 @@ footer{
     #divHeader{
         flex-direction: row!important;
         justify-content: space-around;
+    }
+}
+
+@media (min-width: 1023px){
+    #contenedorTarjetas{
+        flex-direction: row!important;
     }
 }

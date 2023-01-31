@@ -40,6 +40,12 @@ h1{
     font-weight: bold;
 }
 
+.nav-link:hover{
+    background-color: #777;
+    border-color: #100720;
+    color: #FFC23C;
+}
+
 .active{
     background-color: #100720;
     color: #FFC23C!important;
@@ -47,6 +53,53 @@ h1{
 
 #main {
     min-height: 30vh;
+}
+
+.container{
+    background-color: rgba(255, 255, 255, 0.30);
+    backdrop-filter: blur( 4px);
+    border: 1px solid  rgba(255, 255, 255, 0.18);
+}
+
+#cuentas{
+    background: #614385;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #516395, #614385);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #516395, #614385); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-family: 'Orbitron', sans-serif!important;
+}
+
+.card:hover{
+    transform: scale(1.05);
+}
+
+.btn{
+    color: #100720;
+    background-color: #FFC23C;
+    border: solid 2px #100720;
+}
+
+.btn:hover{
+    color: #FFC23C;
+    background-color: #100720!important;
+    border-color: #FFC23C;
+}
+
+.swal2-cancel {
+    color: #FFC23C !important;
+    background-color: #100720 !important;
+    border: 2px solid #FFC23C !important;
+    font-weight: bold !important;
+}
+
+.swal2-confirm {
+    color: #100720 !important;
+    background-color: #FFC23C !important;
+    border: 2px solid #100720 !important;
+    font-weight: bold !important;
+}
+
+.swal2-confirm:focus{
+    box-shadow: 0 0 0 3px rgb(110 120 129 / 50%)!important;
 }
 
 footer, .subtitulos {
@@ -77,6 +130,6 @@ footer, .subtitulos {
 
 @media (min-width: 1023px){
     #main{
-        min-height: 69vh;
+        min-height: 64vh;
     }
 }

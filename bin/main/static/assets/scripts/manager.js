@@ -19,11 +19,13 @@ createApp({
     },
     methods: {
         cargarDatos() {
-            axios.get("http://localhost:8080/api/clients")
+            axios.get("/rest/clients")
                 .then((respuesta) => {
+                    console.log(respuesta)
                     this.data = respuesta.data;
-                    this.clientes = respuesta.data;
-                    this.uri = "http://localhost:8080/rest/clients/";
+                    this.clientes = respuesta.data._embedded.clients;
+                    console.log(this.clientes)
+                    this.uri = "/rest/clients/";
                 })
                 .catch(e => console.log(e));
         },
@@ -48,7 +50,7 @@ createApp({
         },
 
         enviarCliente(nombre, apellido, email) {
-            axios.post("http://localhost:8080/rest/clients", {
+            axios.post("/rest/clients", {
                 firstName: nombre,
                 lastName: apellido,
                 email: email
@@ -68,17 +70,15 @@ createApp({
                 if (result.isConfirmed) {
                     this.uri = this.uri + cliente.id;
                     axios.delete(this.uri)
-                        .then(result => {
+                        .then(() => {
                             this.cargarDatos();
                             Swal.fire({
                                 icon: "success",
                                 text: "Deleted customer",
                             });
-                        })
-                        .catch(e => console.log(e));                    
+                        }).catch(e => console.log(e));                    
                 }
-            })
-                .catch(e => console.log(e));
+            }).catch(e => console.log(e));
         },
 
         modificarCliente(cliente) {
